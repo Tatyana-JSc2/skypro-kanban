@@ -1,7 +1,7 @@
 export function Cards({ theme, title, date, status }) {
-    return (
-        <div classNames="cards__item">
-            <div classNames="cards__card card">
+    return (<div className="cards">
+        <div className="cards__item">
+            <div className="cards__card card">
                 <div className="card__group">
                     <div className="card__theme _orange">
                         <p className="_orange">{theme}</p>
@@ -35,5 +35,6 @@ export function Cards({ theme, title, date, status }) {
                 </div>
             </div>
         </div>
+    </div>
     )
 }

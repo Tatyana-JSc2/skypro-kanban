@@ -2,6 +2,7 @@ import { cardList } from "../../data";
 import { Cards } from "./Cards";
 import { Columns } from "./Columns";
 
+
 const statusList = [
 	"Без статуса",
 	"Нужно сделать",
