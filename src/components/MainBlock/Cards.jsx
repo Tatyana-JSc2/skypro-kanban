@@ -16,7 +16,7 @@ export function Cards({ theme, title, date, status }) {
                 </div>
                 <div className="card__content">
                     <a href="" target="_blank">
-                        <h3 className="card__title">Название задачи</h3>
+                        <h3 className="card__title">{title}</h3>
                     </a>
                     <div className="card__date">
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
