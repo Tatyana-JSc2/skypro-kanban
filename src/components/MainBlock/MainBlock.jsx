@@ -1,5 +1,4 @@
-import { cardList } from "../../data";
-import { Cards } from "./Cards";
+
 import { Columns } from "./Columns";
 
 
@@ -13,18 +12,19 @@ const statusList = [
 
 
 
-function MainBlock() {
+function MainBlock({ taskList, isLoading }) {
+
 	return (
 		<main className="main">
 			<div className="container">
 
 				<div className="main__block">
 					<div className="main__content">
-						{
-							statusList.map((status, index) =>
-								<Columns status={status} key={index} cardList={cardList.filter((card) => card.status === status)} />
-							)
+						{isLoading ? "Данные загружаются" : statusList.map((status, index) =>
+							<Columns status={status} key={index} cardList={taskList.filter((card) => card.status === status)} />
+						)
 						}
+
 					</div>
 
 				</div>

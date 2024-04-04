@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -7,8 +8,17 @@ import PopNewCard from './components/PopNewCard/PopNewCard';
 import PopBrowse from './components/PopBrowse/PopBrowse';
 import Header from './components/Header/Header';
 import MainBlock from './components/MainBlock/MainBlock';
+import { cardList } from './data';
 
 function App() {
+  const [taskList, setTaskList] = useState(cardList);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout();
+  }, [])
 
   return (
 
@@ -23,9 +33,9 @@ function App() {
 
       {/* pop-up end*/}
 
-      <Header />
+      <Header setTaskList={setTaskList} taskList={taskList} />
 
-      <MainBlock />
+      <MainBlock taskList={taskList} isLoading={isLoading} />
 
     </div>
 

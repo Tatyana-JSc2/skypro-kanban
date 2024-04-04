@@ -1,4 +1,24 @@
-function Header() {
+import { useState } from "react";
+
+function Header({ setTaskList, taskList }) {
+
+	const [isOpen, setIsOpen] = useState(false);
+	const popUserSetName = () => {
+		setIsOpen(!isOpen);
+	};
+
+	function addTask() {
+		const newTask = {
+			id: taskList.length + 1,
+			theme: "Research",
+			title: "Новая задача",
+			date: "30.10.23",
+			status: "Без статуса"
+		};
+		setTaskList([...taskList, newTask]);
+	}
+
+
 	return (
 		<header className="header">
 			<div className="container">
@@ -10,18 +30,20 @@ function Header() {
 						<a href="" target="_self"><img src="images/logo_dark.png" alt="logo" /></a>
 					</div>
 					<nav className="header__nav">
-						<button className="header__btn-main-new _hover01" id="btnMainNew"><a href="#popNewCard">Создать новую задачу</a></button>
-						<a href="#user-set-target" className="header__user _hover02">Ivan Ivanov</a>
-						<div className="header__pop-user-set pop-user-set" id="user-set-target">
-							{/*<a href="">x</a> */}
-							<p className="pop-user-set__name">Ivan Ivanov</p>
-							<p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-							<div className="pop-user-set__theme">
-								<p>Темная тема</p>
-								<input type="checkbox" className="checkbox" name="checkbox" />
+						<button onClick={addTask} className="header__btn-main-new _hover01" id="btnMainNew">Создать новую задачу</button>
+						<a onClick={popUserSetName} href="#user-set-target" className="header__user _hover02">Ivan Ivanov</a>
+						{isOpen &&
+							<div className="header__pop-user-set pop-user-set" id="user-set-target">
+								{/*<a href="">x</a> */}
+								<p className="pop-user-set__name">Ivan Ivanov</p>
+								<p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
+								<div className="pop-user-set__theme">
+									<p>Темная тема</p>
+									<input type="checkbox" className="checkbox" name="checkbox" />
+								</div>
+								<button type="button" className="_hover03"><a href="#popExit">Выйти</a></button>
 							</div>
-							<button type="button" className="_hover03"><a href="#popExit">Выйти</a></button>
-						</div>
+						}
 					</nav>
 				</div>
 			</div>
@@ -31,3 +53,5 @@ function Header() {
 
 
 export default Header
+
+//<a href="#popNewCard">Создать новую задачу</a>
