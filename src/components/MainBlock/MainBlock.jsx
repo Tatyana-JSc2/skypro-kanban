@@ -1,5 +1,5 @@
 
-import { Columns } from "./Columns";
+import { Columns } from "../Columns/Columns";
 
 
 const statusList = [

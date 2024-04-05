@@ -1,4 +1,5 @@
 import { useState } from "react";
+import * as S from "./Header.styled";
 
 function Header({ setTaskList, taskList }) {
 
@@ -20,7 +21,7 @@ function Header({ setTaskList, taskList }) {
 
 
 	return (
-		<header className="header">
+		<S.Header >
 			<div className="container">
 				<div className="header__block">
 					<div className="header__logo _show _light">
@@ -30,7 +31,7 @@ function Header({ setTaskList, taskList }) {
 						<a href="" target="_self"><img src="images/logo_dark.png" alt="logo" /></a>
 					</div>
 					<nav className="header__nav">
-						<button onClick={addTask} className="header__btn-main-new _hover01" id="btnMainNew">Создать новую задачу</button>
+						<S.HeaderBtn onClick={addTask} id="btnMainNew">Создать новую задачу</S.HeaderBtn>
 						<a onClick={popUserSetName} href="#user-set-target" className="header__user _hover02">Ivan Ivanov</a>
 						{isOpen &&
 							<div className="header__pop-user-set pop-user-set" id="user-set-target">
@@ -47,7 +48,7 @@ function Header({ setTaskList, taskList }) {
 					</nav>
 				</div>
 			</div>
-		</header>
+		</S.Header>
 	)
 }
 

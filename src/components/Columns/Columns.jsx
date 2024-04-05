@@ -1,5 +1,5 @@
 import { cardList } from "../../data";
-import { Cards } from "./Cards";
+import { Cards } from "../Cards/Cards";
 
 export function Columns({ status, cardList}) {
     return (
