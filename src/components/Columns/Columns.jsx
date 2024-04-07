@@ -1,20 +1,24 @@
 import { cardList } from "../../data";
 import { Cards } from "../Cards/Cards";
+import * as S from "./Columns.styled";
+import * as S1 from "../Cards/Cards.styled"
+
+
 
 export function Columns({ status, cardList}) {
     return (
-        <div className="main__column column">
-            <div className="column__title">
+        <S.MainColumn>
+            <S.ColumnTitle>
                 <p>{status}</p>
-            </div>
-            <div className="cards">
+            </S.ColumnTitle>
+            <S1.Cards>
                 {
                     cardList.map((card) =>  
                     <Cards key={card.id}{...card}/>)
                 } 
                     
-            </div>
+            </S1.Cards>
            
-        </div>
+        </S.MainColumn>
     )
 }
