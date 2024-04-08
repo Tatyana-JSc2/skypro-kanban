@@ -35,14 +35,14 @@ function PopBrowse() {
 							<form className="pop-browse__form form-browse" id="formBrowseCard" action="#">
 								<div className="form-browse__block">
 									<label htmlFor="textArea01" className="subttl">Описание задачи</label>
-									<textarea className="form-browse__area" name="text" id="textArea01" readonly placeholder="Введите описание задачи..."></textarea>
+									<textarea className="form-browse__area" name="text" id="textArea01" readOnly placeholder="Введите описание задачи..."></textarea>
 								</div>
 							</form>
 							<div className="pop-new-card__calendar calendar">
 								<p className="calendar__ttl subttl">Даты</p>
 								<div className="calendar__block">
 									<div className="calendar__nav">
-										<div classNames="calendar__month">Сентябрь 2023</div>
+										<div className="calendar__month">Сентябрь 2023</div>
 										<div className="nav__actions">
 											<div className="nav__action" data-action="prev">
 												<svg xmlns="http://www.w3.org/2000/svg" width="6" height="11" viewBox="0 0 6 11">
@@ -59,8 +59,8 @@ function PopBrowse() {
 									<div className="calendar__content">
 										<div className="calendar__days-names">
 											<div className="calendar__day-name">пн</div>
-											<div classNames="calendar__day-name">вт</div>
-											<div classNames="calendar__day-name">ср</div>
+											<div className="calendar__day-name">вт</div>
+											<div className="calendar__day-name">ср</div>
 											<div className="calendar__day-name">чт</div>
 											<div className="calendar__day-name">пт</div>
 											<div className="calendar__day-name -weekend-">сб</div>
@@ -72,9 +72,9 @@ function PopBrowse() {
 											<div className="calendar__cell _other-month">30</div>
 											<div className="calendar__cell _cell-day">31</div>
 											<div className="calendar__cell _cell-day">1</div>
-											<div classNames="calendar__cell _cell-day _weekend">2</div>
+											<div className="calendar__cell _cell-day _weekend">2</div>
 											<div className="calendar__cell _cell-day _weekend">3</div>
-											<div classNames="calendar__cell _cell-day">4</div>
+											<div className="calendar__cell _cell-day">4</div>
 											<div className="calendar__cell _cell-day">5</div>
 											<div className="calendar__cell _cell-day ">6</div>
 											<div className="calendar__cell _cell-day">7</div>
@@ -97,7 +97,7 @@ function PopBrowse() {
 											<div className="calendar__cell _cell-day _weekend">24</div>
 											<div className="calendar__cell _cell-day">25</div>
 											<div className="calendar__cell _cell-day">26</div>
-											<div classNames="calendar__cell _cell-day">27</div>
+											<div className="calendar__cell _cell-day">27</div>
 											<div className="calendar__cell _cell-day">28</div>
 											<div className="calendar__cell _cell-day">29</div>
 											<div className="calendar__cell _cell-day _weekend">30</div>
