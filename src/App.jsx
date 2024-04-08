@@ -8,8 +8,8 @@ import PopNewCard from './components/PopNewCard/PopNewCard';
 import PopBrowse from './components/PopBrowse/PopBrowse';
 import Header from './components/Header/Header';
 import MainBlock from './components/MainBlock/MainBlock';
-import { cardList } from './data';
 import { GlobalStyle } from './styles/global.styled'
+import { cardList } from './lib/data'
 
 function App() {
   const [taskList, setTaskList] = useState(cardList);
