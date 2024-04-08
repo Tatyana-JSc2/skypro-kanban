@@ -1,5 +1,7 @@
 
-import { Columns } from "./Columns";
+import { Container } from "../../styles/shared";
+import { Columns } from "../Columns/Columns";
+import * as S from "./MainBlock.styled";
 
 
 const statusList = [
@@ -15,21 +17,19 @@ const statusList = [
 function MainBlock({ taskList, isLoading }) {
 
 	return (
-		<main className="main">
-			<div className="container">
+		<S.Main>
+			<Container>
 
-				<div className="main__block">
-					<div className="main__content">
+				<S.MainBlock>
+					<S.MainContent>
 						{isLoading ? "Данные загружаются" : statusList.map((status, index) =>
 							<Columns status={status} key={index} cardList={taskList.filter((card) => card.status === status)} />
 						)
 						}
-
-					</div>
-
-				</div>
-			</div>
-		</main>
+					</S.MainContent>
+				</S.MainBlock>
+			</Container>
+		</S.Main>
 	)
 }
 

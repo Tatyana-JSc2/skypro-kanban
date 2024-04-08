@@ -14,11 +14,11 @@ function PopNewCard() {
 						<div className="pop-new-card__wrap">
 							<form className="pop-new-card__form form-new" id="formNewCard" action="#">
 								<div className="form-new__block">
-									<label for="formTitle" className="subttl">Название задачи</label>
-									<input className="form-new__input" type="text" name="name" id="formTitle" placeholder="Введите название задачи..." autofocus />
+									<label htmlFor="formTitle" className="subttl">Название задачи</label>
+									<input className="form-new__input" type="text" name="name" id="formTitle" placeholder="Введите название задачи..." autoFocus />
 								</div>
 								<div className="form-new__block">
-									<label for="textArea" className="subttl">Описание задачи</label>
+									<label htmlFor="textArea" className="subttl">Описание задачи</label>
 									<textarea className="form-new__area" name="text" id="textArea" placeholder="Введите описание задачи..."></textarea>
 								</div>
 							</form>
@@ -27,7 +27,7 @@ function PopNewCard() {
 						<div className="pop-new-card__categories categories">
 							<p className="categories__p subttl">Категория</p>
 							<div className="categories__themes">
-								<div classNames="categories__theme _orange _active-category">
+								<div className="categories__theme _orange _active-category">
 									<p className="_orange">Web Design</p>
 								</div>
 								<div className="categories__theme _green">

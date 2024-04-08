@@ -1,4 +1,6 @@
 import { useState } from "react";
+import * as S from "./Header.styled";
+import { Container } from "../../styles/shared";
 
 function Header({ setTaskList, taskList }) {
 
@@ -10,7 +12,7 @@ function Header({ setTaskList, taskList }) {
 	function addTask() {
 		const newTask = {
 			id: taskList.length + 1,
-			theme: "Research",
+			theme: "Неизвестно",
 			title: "Новая задача",
 			date: "30.10.23",
 			status: "Без статуса"
@@ -18,36 +20,36 @@ function Header({ setTaskList, taskList }) {
 		setTaskList([...taskList, newTask]);
 	}
 
-
+//className="header__user _hover02"
 	return (
-		<header className="header">
-			<div className="container">
-				<div className="header__block">
-					<div className="header__logo _show _light">
+		<S.Header >
+			<Container>
+				<S.HeaderBlock>
+					<S.HeaderLogo className=" _show _light">
 						<a href="" target="_self"><img src="images/logo.png" alt="logo" /></a>
-					</div>
-					<div className="header__logo _dark">
+					</S.HeaderLogo>
+					<S.HeaderLogo className=" _dark">
 						<a href="" target="_self"><img src="images/logo_dark.png" alt="logo" /></a>
-					</div>
-					<nav className="header__nav">
-						<button onClick={addTask} className="header__btn-main-new _hover01" id="btnMainNew">Создать новую задачу</button>
-						<a onClick={popUserSetName} href="#user-set-target" className="header__user _hover02">Ivan Ivanov</a>
+					</S.HeaderLogo>
+					<S.HeaderNav className="header__nav">
+						<S.HeaderBtn onClick={addTask} id="btnMainNew">Создать новую задачу</S.HeaderBtn>
+						<S.HeaderUser onClick={popUserSetName} href="#user-set-target">Ivan Ivanov</S.HeaderUser>
 						{isOpen &&
-							<div className="header__pop-user-set pop-user-set" id="user-set-target">
+							<S.HeaderPopUserSet id="user-set-target">
 								{/*<a href="">x</a> */}
-								<p className="pop-user-set__name">Ivan Ivanov</p>
-								<p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-								<div className="pop-user-set__theme">
+								<S.PopUserSetName>Ivan Ivanov</S.PopUserSetName>
+								<S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
+								<S.PopUserSetTheme className="pop-user-set__theme">
 									<p>Темная тема</p>
-									<input type="checkbox" className="checkbox" name="checkbox" />
-								</div>
-								<button type="button" className="_hover03"><a href="#popExit">Выйти</a></button>
-							</div>
+									<input type="checkbox" name="checkbox" />
+								</S.PopUserSetTheme>
+								<S.PopUserSetButton type="button"><a href="#popExit">Выйти</a></S.PopUserSetButton>
+							</S.HeaderPopUserSet>
 						}
-					</nav>
-				</div>
-			</div>
-		</header>
+					</S.HeaderNav>
+				</S.HeaderBlock>
+			</Container>
+		</S.Header>
 	)
 }
 
