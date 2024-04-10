@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom"
+import { Paths } from "../../lib/paths"
+
 function PopBrowse() {
 
 	return (
@@ -123,7 +126,7 @@ function PopBrowse() {
 								<button className="btn-browse__edit _btn-bor _hover03"><a href="#">Редактировать задачу</a></button>
 								<button className="btn-browse__delete _btn-bor _hover03"><a href="#">Удалить задачу</a></button>
 							</div>
-							<button className="btn-browse__close _btn-bg _hover01"><a href="#">Закрыть</a></button>
+							<button className="btn-browse__close _btn-bg _hover01"><Link to={Paths.MAIN}>Закрыть</Link></button>
 						</div>
 						<div className="pop-browse__btn-edit _hide">
 							<div className="btn-group">

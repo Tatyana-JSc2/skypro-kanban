@@ -5,7 +5,7 @@ import * as S1 from "../Cards/Cards.styled"
 
 
 
-export function Columns({ status, cardList }) {
+export function Columns({ status, newCardList }) {
     return (
         <S.MainColumn>
             <S.ColumnTitle>
@@ -13,7 +13,7 @@ export function Columns({ status, cardList }) {
             </S.ColumnTitle>
             <S1.Cards>
                 {
-                    cardList.map((card) =>
+                    newCardList.map((card) =>
                         <Cards key={card.id}{...card} />)
                 }
 

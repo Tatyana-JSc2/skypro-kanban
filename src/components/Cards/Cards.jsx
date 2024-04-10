@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom"
 import * as S from "./Cards.styled"
 
 
-export function Cards({ theme, title, date, status }) {
+export function Cards({ theme, title, date, id, status }) {
     const GetColor = (anyTheme) => {
         switch (anyTheme) {
             case "Web Design":
@@ -22,13 +23,13 @@ export function Cards({ theme, title, date, status }) {
                         <S.CardTheme $topicColor={GetColor(theme)}>
                             <p >{theme}</p>
                         </S.CardTheme>
-                        <a href="#popBrowse" target="_self">
+                        <Link to={`/card/${id}`}>
                             <S.CardBtn >
                                 <div></div>
                                 <div></div>
                                 <div></div>
                             </S.CardBtn>
-                        </a>
+                        </Link>
                     </S.CardGroup>
                     <S.CardContent>
                         <a href="" target="_blank">

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import * as S from "./Header.styled";
 import { Container } from "../../styles/shared";
+import { Link } from "react-router-dom";
+import { Paths } from "../../lib/paths";
 
 function Header({ setTaskList, taskList }) {
 
@@ -20,16 +22,16 @@ function Header({ setTaskList, taskList }) {
 		setTaskList([...taskList, newTask]);
 	}
 
-//className="header__user _hover02"
+	//className="header__user _hover02"
 	return (
 		<S.Header >
 			<Container>
 				<S.HeaderBlock>
 					<S.HeaderLogo className=" _show _light">
-						<a href="" target="_self"><img src="images/logo.png" alt="logo" /></a>
+						<Link to={Paths.MAIN}><img src="images/logo.png" alt="logo" /></Link>
 					</S.HeaderLogo>
 					<S.HeaderLogo className=" _dark">
-						<a href="" target="_self"><img src="images/logo_dark.png" alt="logo" /></a>
+						<Link to={Paths.MAIN}><img src="images/logo_dark.png" alt="logo" /></Link>
 					</S.HeaderLogo>
 					<S.HeaderNav className="header__nav">
 						<S.HeaderBtn onClick={addTask} id="btnMainNew">Создать новую задачу</S.HeaderBtn>
@@ -43,7 +45,7 @@ function Header({ setTaskList, taskList }) {
 									<p>Темная тема</p>
 									<input type="checkbox" name="checkbox" />
 								</S.PopUserSetTheme>
-								<S.PopUserSetButton type="button"><a href="#popExit">Выйти</a></S.PopUserSetButton>
+								<S.PopUserSetButton type="button"><Link to={Paths.EXIT}>Выйти</Link></S.PopUserSetButton>
 							</S.HeaderPopUserSet>
 						}
 					</S.HeaderNav>
