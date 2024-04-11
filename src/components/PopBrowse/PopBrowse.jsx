@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Paths } from "../../lib/paths"
 
 function PopBrowse() {
-
+const {id}=useParams();
 	return (
 		<div className="pop-browse" id="popBrowse">
 			<div className="pop-browse__container">
 				<div className="pop-browse__block">
 					<div className="pop-browse__content">
 						<div className="pop-browse__top-block">
-							<h3 className="pop-browse__ttl">Название задачи</h3>
+							<h3 className="pop-browse__ttl">Задача {id}</h3>
 							<div className="categories__theme theme-top _orange _active-category">
 								<p className="_orange">Web Design</p>
 							</div>

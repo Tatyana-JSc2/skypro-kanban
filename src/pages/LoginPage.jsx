@@ -1,10 +1,9 @@
 import React from 'react'
+import Login from '../components/Login/Login'
 
-const LoginPage = () => {
+const LoginPage = ({setIsAuth}) => {
   return (
-    <div>
-      <h2>страница логина</h2>
-    </div>
+    <Login setIsAuth={setIsAuth}/>
   )
 }
 
