@@ -1,23 +1,32 @@
-function PopExit() {
+import { Link, useNavigate } from "react-router-dom"
+import { Paths } from "../../lib/paths"
 
-    return (
-<div className="pop-exit" id="popExit">
-				<div className="pop-exit__container">
-					<div className="pop-exit__block">
-						<div className="pop-exit__ttl">
-							<h2>Выйти из аккаунта?</h2>
-						</div>
-						<form className="pop-exit__form" id="formExit" action="#">
-							<div className="pop-exit__form-group">
-								<button className="pop-exit__exit-yes _hover01" id="exitYes"><a href="modal/signin.html">Да, выйти</a> </button>
-								<button className="pop-exit__exit-no _hover03" id="exitNo"><a href="main.html">Нет, остаться</a> </button>
-							</div>
-						</form>
+function PopExit({ setIsAuth }) {
+
+	const navigate = useNavigate();
+	function exit() {
+		localStorage.setItem("user", "");
+		setIsAuth(falce);
+		navigate(Paths.LOGIN);
+	}
+
+	return (
+		<div className="pop-exit" id="popExit">
+			<div className="pop-exit__container">
+				<div className="pop-exit__block">
+					<div className="pop-exit__ttl">
+						<h2>Выйти из аккаунта?</h2>
 					</div>
+					<form className="pop-exit__form" id="formExit" action="#">
+						<div className="pop-exit__form-group">
+							<button className="pop-exit__exit-yes _hover01" id="exitYes" onClick={exit}>Да, выйти</button>
+							<button className="pop-exit__exit-no _hover03" id="exitNo"><Link to={Paths.MAIN}>Нет, остаться</Link> </button>
+						</div>
+					</form>
 				</div>
 			</div>
-    )
-  }
-  
-  // Экспорт компонента, чтобы его можно было использовать в других частях приложения
-  export default PopExit
+		</div>
+	)
+}
+
+export default PopExit
