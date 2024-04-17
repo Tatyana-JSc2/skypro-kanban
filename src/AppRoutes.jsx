@@ -13,14 +13,15 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
 function AppRoutes() {
 
-
   function User() {
     const user = localStorage.getItem("user");
     return (user === "user" ? true : false);
   }
 
-
   const [isAuth, setIsAuth] = useState(User);
+
+  const [token, setToken] = useState(null);
+
   return (
     <>
       <Routes>
@@ -30,8 +31,8 @@ function AppRoutes() {
             <Route path={Paths.EXIT} element={<ExitPage setIsAuth={setIsAuth} />} />
           </Route>
         </Route>
-        <Route path={Paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth} />} />
-        <Route path={Paths.REGISTER} element={<RegisterPage />} />
+        <Route path={Paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth} token={token} />} />
+        <Route path={Paths.REGISTER} element={<RegisterPage setIsAuth={setIsAuth} setToken={setToken}/>} />
         <Route path={Paths.ERROR} element={<NotFoundPage />} />
       </Routes>
     </>

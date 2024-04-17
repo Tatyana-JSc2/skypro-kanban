@@ -9,3 +9,4 @@ function PrivateRoute({isAuth}) {
 }
 
 export default PrivateRoute;
+

@@ -1,11 +1,9 @@
 import React from 'react'
+import Register from '../components/Register/Register'
 
-const RegisterPage = () => {
+const RegisterPage = ({setIsAuth, setToken}) => {
   return (
-    <div>
-      <h2>страница регистрации</h2>
-    </div>
+    <Register setIsAuth={setIsAuth} setToken={setToken}/>
   )
 }
-
 export default RegisterPage
