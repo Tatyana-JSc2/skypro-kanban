@@ -39,7 +39,7 @@ function Register({ setIsAuth, setToken }) {
 
 
 	const reg = async () => {
-		await getReg(name, email, password).then((data) => {
+		await getReg({ name, email, password }).then((data) => {
 			//throw new Error("Ошибка сервера");
 			console.log(data);
 			setToken(data.user.token);
