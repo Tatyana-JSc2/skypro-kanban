@@ -3,7 +3,7 @@ import { Paths } from "../../lib/paths"
 import '../../App.css'
 import { useState } from "react";
 
-let auth = false;
+
 
 function Login({ setIsAuth, token }) {
 
@@ -26,17 +26,12 @@ function Login({ setIsAuth, token }) {
 
 
     function login() {
-        //if (token != null) {
-        localStorage.setItem("user", "user");
-        setIsAuth(true);
-        auth = false;
+        localStorage.setItem("user", JSON.stringify(newUser));
+        setIsAuth(newUser);//newUser нужно получить из апи
         navigate(Paths.MAIN);
-
-       // } else {
-       //     auth = true;
-       //     return Login;
-       // }
     }
+
+    //{auth && <h2 style={{color:"red"}}>Введены неверные имя и пароль</h2>}
 
     return (
         <div className="wrapper">
@@ -47,9 +42,9 @@ function Login({ setIsAuth, token }) {
                             <h2>Вход</h2>
                         </div>
                         <form className="modal__form-login" id="formLogIn" action="#">
-                            <input className="modal__input" type="text" name="login" id="formlogin" placeholder="Эл. почта" />
-                            <input className="modal__input" type="password" name="password" id="formpassword" placeholder="Пароль" />
-                            {auth && <h2 style={{color:"red"}}>Введены неверные имя и пароль</h2>}
+                            <input className="modal__input" id="formlogin" type="text" name="login" placeholder="Эл. почта" />
+                            <input className="modal__input" id="formpassword" type="password" name="password" placeholder="Пароль" />
+                            
                             <button className="modal__btn-enter _hover01" id="btnEnter" type="button" onClick={login}>Войти</button>
                             <div className="modal__form-group">
                                 <p>Нужно зарегистрироваться?</p>

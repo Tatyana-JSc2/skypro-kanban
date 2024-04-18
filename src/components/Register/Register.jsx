@@ -3,18 +3,26 @@ import { Paths } from "../../lib/paths"
 import '../../App.css'
 import { getReg } from "../../api";
 import * as S from "./Register.styled";
+import { useState } from "react";
 
 
 
 function Register({ setIsAuth, setToken }) {
-	const [formData, setFormData] = useState(formFields);
-	const navigate = useNavigate();
 
 	const formFields = {
 		firstName: "",
 		email: "",
 		password: "",
 	};
+
+	const [formData, setFormData] = useState(formFields);
+	const navigate = useNavigate();
+
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+	};
+
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target; // Извлекаем имя поля и его значение
@@ -25,17 +33,23 @@ function Register({ setIsAuth, setToken }) {
 		});
 	};
 
+	let name = formData.firstName;
+	let email = formData.email;
+	let password = formData.password;
 
-	function reg() {
-		getReg().then((data) => {
+
+	const reg = async () => {
+		await getReg(name, email, password).then((data) => {
 			//throw new Error("Ошибка сервера");
-			setToken(data.token);
+			console.log(data);
+			setToken(data.user.token);
 		}).catch((err) => {
 			setError(err.message);
 		}).finally(() => {
+			console.log(3);
 			setIsLoading(false);
-			localStorage.setItem("user", "user");
-			setIsAuth(true);
+			localStorage.setItem("user", JSON.stringify(data.user));
+			setIsAuth(data.user);
 			navigate(Paths.MAIN);
 		});
 	};
@@ -59,11 +73,11 @@ function Register({ setIsAuth, setToken }) {
 						<S.ModalTtl>
 							<h2>Регистрация</h2>
 						</S.ModalTtl>
-						<S.ModalFormLogin id="formLogUp" action="#">
-							<S.ModalInput className="first-name" type="text" placeholder="Имя" name="first-name" label="Имя" value={formData.firstName} onChange={handleInputChange} />
+						<S.ModalFormLogin onSubmit={handleSubmit} id="formLogUp" action="#">
+							<S.ModalInput className="first-name" id="first-name" type="text" name="first-name" placeholder="Имя" value={formData.firstName} onChange={handleInputChange} />
 							<S.ModalInput className="login" type="text" placeholder="Эл. почта" name="login" label="Эл. почта" value={formData.email} onChange={handleInputChange} />
 							<S.ModalInput className="password-first" type="password" placeholder="Пароль" name="password" label="Пароль" value={formData.password} onChange={handleInputChange} />
-							<S.ModalBtn id="SignUpEnter" onClick={reg}>Зарегистрироваться</S.ModalBtn>
+							<S.ModalBtn id="SignUpEnter" type="submit" onClick={reg}>Зарегистрироваться</S.ModalBtn>
 							<S.ModalFormGroup>
 								<p>Уже есть аккаунт?  <Link to={Paths.LOGIN}>Войдите здесь</Link>
 								</p>

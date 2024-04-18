@@ -17,7 +17,7 @@ export async function getTasks() {
     return data;
 }
 
-export async function getReg({name, login, password}) {
+export async function getReg(name, login, password) {
     const response = await fetch("https://wedev-api.sky.pro/api/user", {
         
         method: "POST",

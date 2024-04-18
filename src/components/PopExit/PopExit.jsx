@@ -6,7 +6,7 @@ function PopExit({ setIsAuth }) {
 	const navigate = useNavigate();
 	function exit() {
 		localStorage.setItem("user", "");
-		setIsAuth(falce);
+		setIsAuth(false);
 		navigate(Paths.LOGIN);
 	}
 
