@@ -113,7 +113,7 @@ export const ModalBtn = styled.button`
 }
 ${SH.Hover01}
 `
-export const ModalFormGroup = styled.form`
+export const ModalFormGroup = styled.div`
   text-align: center;
 & p {
   color: rgba(148, 166, 190, 0.4);

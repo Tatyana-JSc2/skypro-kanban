@@ -2,36 +2,33 @@ import { Link, useNavigate } from "react-router-dom"
 import { Paths } from "../../lib/paths"
 import '../../App.css'
 import { useState } from "react";
+import { getAuth } from "../../api";
+import * as S from "./Login.styled";
 
 
 
-function Login({ setIsAuth, token }) {
+function Login({ setIsAuth, token}) {
 
     const navigate = useNavigate();
-    //const [formData, setFormData] = useState(formFields);
+    const [login, setName] = useState('');
+    const [password, setEmail] = useState('');
+    const [error, setError] = useState(null);
 
-    //const formFields = {
-    //    login: "",
-    //    password: "",
-    //  };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        getAuth({login, password, token}).then((data) => {
+            setIsAuth(true);
+            navigate(Paths.MAIN);
+        }).catch((err) => {
+            setError(err.message);
+            console.log(err.message);
+        });
+    };
 
-      //const handleInputChange = (e) => {
-      //  const { name, value } = e.target; // Извлекаем имя поля и его значение
-      
-      //  setFormData({
-      //    ...formData, // Копируем текущие данные из состояния
-      //    [name]: value, // Обновляем нужное поле
-      //  });
-     // };
-
-
-    function login() {
-        localStorage.setItem("user", JSON.stringify(newUser));
-        setIsAuth(newUser);//newUser нужно получить из апи
-        navigate(Paths.MAIN);
-    }
-
-    //{auth && <h2 style={{color:"red"}}>Введены неверные имя и пароль</h2>}
+    // localStorage.setItem("user", JSON.stringify(newUser));
+    //    setIsAuth(newUser);//newUser нужно получить из апи
+    //    navigate(Paths.MAIN);
+    //{auth && <h2 style={{color:"red"}}>"Пользователя с такими данными не существует. Введите корректный логин и пароль или зарегистрируйтесь."</h2>}
 
     return (
         <div className="wrapper">
@@ -41,16 +38,18 @@ function Login({ setIsAuth, token }) {
                         <div className="modal__ttl">
                             <h2>Вход</h2>
                         </div>
-                        <form className="modal__form-login" id="formLogIn" action="#">
-                            <input className="modal__input" id="formlogin" type="text" name="login" placeholder="Эл. почта" />
-                            <input className="modal__input" id="formpassword" type="password" name="password" placeholder="Пароль" />
-                            
-                            <button className="modal__btn-enter _hover01" id="btnEnter" type="button" onClick={login}>Войти</button>
-                            <div className="modal__form-group">
+                        <S.ModalFormLogin onSubmit={handleSubmit} id="formLogIn" action="#">
+                            <S.ModalInput type="text" name="login" placeholder="Эл. почта" value={login}
+                                onChange={(e) => setName(e.target.value)} />
+                            <S.ModalInput type="password" name="password" placeholder="Пароль" value={password}
+                                onChange={(e) => setEmail(e.target.value)} />
+                            <S.ModalBtnEnter type="submit">Войти</S.ModalBtnEnter>
+                            {error && "Пользователя с такими данными не существует. Введите корректный логин и пароль или зарегистрируйтесь."}
+                            <S.ModalFormGroup>
                                 <p>Нужно зарегистрироваться?</p>
                                 <Link to={Paths.REGISTER}>Регистрируйтесь здесь</Link>
-                            </div>
-                        </form>
+                            </S.ModalFormGroup>
+                        </S.ModalFormLogin>
 
                     </div>
                 </div>

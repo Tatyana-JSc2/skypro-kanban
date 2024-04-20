@@ -6,8 +6,7 @@ import * as S from "./Register.styled";
 import { useState } from "react";
 
 
-
-function Register({ setIsAuth, setToken }) {
+function Register({ setToken }) {
 
 	const formFields = {
 		firstName: "",
@@ -17,11 +16,12 @@ function Register({ setIsAuth, setToken }) {
 
 	const [formData, setFormData] = useState(formFields);
 	const navigate = useNavigate();
+	const [error, setError] = useState(null);
 
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-	};
+	//const handleSubmit = (event) => {
+	//	event.preventDefault();
+	//};
 
 
 	const handleInputChange = (e) => {
@@ -33,24 +33,15 @@ function Register({ setIsAuth, setToken }) {
 		});
 	};
 
-	let name = formData.firstName;
-	let email = formData.email;
-	let password = formData.password;
-
-
 	const reg = async () => {
-		await getReg({ name, email, password }).then((data) => {
+		await getReg({ name: formData.firstName, login: formData.email, password: formData.password }).then((data) => {
 			//throw new Error("Ошибка сервера");
 			console.log(data);
 			setToken(data.user.token);
+			navigate(Paths.LOGIN);
 		}).catch((err) => {
 			setError(err.message);
-		}).finally(() => {
-			console.log(3);
-			setIsLoading(false);
-			localStorage.setItem("user", JSON.stringify(data.user));
-			setIsAuth(data.user);
-			navigate(Paths.MAIN);
+			console.log(err.message);
 		});
 	};
 
@@ -64,7 +55,7 @@ function Register({ setIsAuth, setToken }) {
 	//value={formData.firstName} onChange={handleInputChange} 
 	//value={formData.email} onChange={handleInputChange} 
 	//value={formData.password} onChange={handleInputChange}
-
+	//Произошла ошибка, попробуйте позже...
 	return (
 		<S.Wrapper>
 			<S.ContainerSignup>
@@ -73,11 +64,12 @@ function Register({ setIsAuth, setToken }) {
 						<S.ModalTtl>
 							<h2>Регистрация</h2>
 						</S.ModalTtl>
-						<S.ModalFormLogin onSubmit={handleSubmit} id="formLogUp" action="#">
-							<S.ModalInput className="first-name" id="first-name" type="text" name="first-name" placeholder="Имя" value={formData.firstName} onChange={handleInputChange} />
-							<S.ModalInput className="login" type="text" placeholder="Эл. почта" name="login" label="Эл. почта" value={formData.email} onChange={handleInputChange} />
-							<S.ModalInput className="password-first" type="password" placeholder="Пароль" name="password" label="Пароль" value={formData.password} onChange={handleInputChange} />
-							<S.ModalBtn id="SignUpEnter" type="submit" onClick={reg}>Зарегистрироваться</S.ModalBtn>
+						<S.ModalFormLogin id="formLogUp" action="#">
+							<S.ModalInput type="text" placeholder="Имя" name="firstName" label="Имя" value={formData.firstName} onChange={handleInputChange} />
+							<S.ModalInput type="text" placeholder="Эл. почта" name="email" label="Эл. почта" value={formData.email} onChange={handleInputChange} />
+							<S.ModalInput type="password" placeholder="Пароль" name="password" label="Пароль" value={formData.password} onChange={handleInputChange} />
+							{error && "Такой пользователь уже существует"}
+							<S.ModalBtn id="SignUpEnter" onClick={reg}>Зарегистрироваться</S.ModalBtn>
 							<S.ModalFormGroup>
 								<p>Уже есть аккаунт?  <Link to={Paths.LOGIN}>Войдите здесь</Link>
 								</p>

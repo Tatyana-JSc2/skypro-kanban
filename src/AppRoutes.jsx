@@ -13,26 +13,29 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
 function AppRoutes() {
 
-  function User() {
-    const user = localStorage.getItem("user");
-    return (user === "user" ? true : false);
-  }
+  //function User() {
+  //  const user = localStorage.getItem("user");
+  //  return (user? true : false);
+  // }
 
-  const [isAuth, setIsAuth] = useState(User);
-
+  const [isAuth, setIsAuth] = useState(false);
   const [token, setToken] = useState(null);
+  // const getToken = () => {
+  //   const token = user ? `Bearer ${user.token}` : undefined;
+  //   return token;
+  // };
 
   return (
     <>
       <Routes>
         <Route element={<PrivateRoute isAuth={isAuth} />}>
-          <Route path={Paths.MAIN} element={<MainPage />}>
+          <Route path={Paths.MAIN} element={<MainPage token={token} />}>
             <Route path={Paths.CARD} element={<CardPage />} />
             <Route path={Paths.EXIT} element={<ExitPage setIsAuth={setIsAuth} />} />
           </Route>
         </Route>
         <Route path={Paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth} token={token} />} />
-        <Route path={Paths.REGISTER} element={<RegisterPage setIsAuth={setIsAuth} setToken={setToken}/>} />
+        <Route path={Paths.REGISTER} element={<RegisterPage setToken={setToken} />} />
         <Route path={Paths.ERROR} element={<NotFoundPage />} />
       </Routes>
     </>
