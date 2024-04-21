@@ -7,16 +7,18 @@ import * as S from "./Login.styled";
 
 
 
-function Login({ setIsAuth, token}) {
+function Login({ setIsAuth, token }) {
 
     const navigate = useNavigate();
-    const [login, setName] = useState('');
-    const [password, setEmail] = useState('');
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        getAuth({login, password, token}).then((data) => {
+        setError(null);
+        getAuth({ login: login, password: password, token: token }).then((user) => {
+            console.log(user);
             setIsAuth(true);
             navigate(Paths.MAIN);
         }).catch((err) => {
@@ -25,11 +27,18 @@ function Login({ setIsAuth, token}) {
         });
     };
 
+    //function Try() {
+    //	localStorage.setItem("user", "user");
+    //	setIsAuth(true);
+    //navigate(Paths.MAIN);
+    //}
+
+
     // localStorage.setItem("user", JSON.stringify(newUser));
     //    setIsAuth(newUser);//newUser нужно получить из апи
     //    navigate(Paths.MAIN);
     //{auth && <h2 style={{color:"red"}}>"Пользователя с такими данными не существует. Введите корректный логин и пароль или зарегистрируйтесь."</h2>}
-
+    //{error && "Пользователя с такими данными не существует. Введите корректный логин и пароль или зарегистрируйтесь."}
     return (
         <div className="wrapper">
             <div className="container-signin">
@@ -38,11 +47,11 @@ function Login({ setIsAuth, token}) {
                         <div className="modal__ttl">
                             <h2>Вход</h2>
                         </div>
-                        <S.ModalFormLogin onSubmit={handleSubmit} id="formLogIn" action="#">
-                            <S.ModalInput type="text" name="login" placeholder="Эл. почта" value={login}
-                                onChange={(e) => setName(e.target.value)} />
-                            <S.ModalInput type="password" name="password" placeholder="Пароль" value={password}
-                                onChange={(e) => setEmail(e.target.value)} />
+                        <S.ModalFormLogin onSubmit={handleSubmit} >
+                            <S.ModalInput type="email" placeholder="Эл. почта" value={login}
+                                onChange={(e) => setLogin(e.target.value)} />
+                            <S.ModalInput type="password" placeholder="Пароль" value={password}
+                                onChange={(e) => setPassword(e.target.value)} />
                             <S.ModalBtnEnter type="submit">Войти</S.ModalBtnEnter>
                             {error && "Пользователя с такими данными не существует. Введите корректный логин и пароль или зарегистрируйтесь."}
                             <S.ModalFormGroup>

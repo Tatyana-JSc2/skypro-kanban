@@ -14,23 +14,22 @@ const MainPage = ({token}) => {
 
   const [taskList, setTaskList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const[error,setError]=useState(null);
-  
-  useEffect(()=>{
-    getTasks({token}).then((data)=>{
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getTasks({token: token}).then((data) => {
       //throw new Error("Ошибка сервера");
       setTaskList(data.tasks);
-    }).catch((err)=>{
+    }).catch((err) => {
       setError(err.message);
-    }).finally(()=>{
+    }).finally(() => {
       setIsLoading(false);
     });
-  },[]);
+  }, []);
 
   return (
     <>
-      
-      <MainBlock setTaskList={setTaskList} taskList={taskList} isLoading={isLoading} error={error}/>
+      <MainBlock setTaskList={setTaskList} taskList={taskList} isLoading={isLoading} error={error} />
       <Outlet />
     </>
   )
