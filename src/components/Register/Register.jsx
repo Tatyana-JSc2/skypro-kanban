@@ -6,7 +6,7 @@ import * as S from "./Register.styled";
 import { useState } from "react";
 
 
-function Register({ setToken }) {
+function Register({ setIsAuth }) {
 
 	const navigate = useNavigate();
 	const [name, setName] = useState('');
@@ -20,7 +20,7 @@ function Register({ setToken }) {
 		getReg({ name: name, login: login, password: password }).then((user) => {
 			//throw new Error("Ошибка сервера");
 			console.log(user);
-			setToken(user.token);
+			setIsAuth(true);
 			navigate(Paths.LOGIN);
 		}).catch((err) => {
 			setError(err.message);
@@ -34,7 +34,7 @@ function Register({ setToken }) {
 	//	setIsAuth(true);
 	//	navigate(Paths.LOGIN);
 	//}
-
+	//{error && "Такой пользователь уже существует"}
 
 	return (
 		<S.Wrapper>

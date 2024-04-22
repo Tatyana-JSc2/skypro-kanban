@@ -7,7 +7,7 @@ import * as S from "./Login.styled";
 
 
 
-function Login({ setIsAuth, token }) {
+function Login({ setIsAuth, setToken }) {
 
     const navigate = useNavigate();
     const [login, setLogin] = useState('');
@@ -17,8 +17,9 @@ function Login({ setIsAuth, token }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         setError(null);
-        getAuth({ login: login, password: password, token: token }).then((user) => {
+        getAuth({ login: login, password: password }).then((user) => {
             console.log(user);
+            setToken(user.token);
             setIsAuth(true);
             navigate(Paths.MAIN);
         }).catch((err) => {

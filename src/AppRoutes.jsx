@@ -34,8 +34,8 @@ function AppRoutes() {
             <Route path={Paths.EXIT} element={<ExitPage setIsAuth={setIsAuth} />} />
           </Route>
         </Route>
-        <Route path={Paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth} token={token}/>} />
-        <Route path={Paths.REGISTER} element={<RegisterPage setToken={setToken} />} />
+        <Route path={Paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth} setToken={setToken} />} />
+        <Route path={Paths.REGISTER} element={<RegisterPage  setIsAuth={setIsAuth}/>} />
         <Route path={Paths.ERROR} element={<NotFoundPage />} />
       </Routes>
     </>

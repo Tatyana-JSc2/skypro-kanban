@@ -19,7 +19,6 @@ export async function getTasks({token}) {
 
 export async function getReg({ name, login, password }) {
     const response = await fetch("https://wedev-api.sky.pro/api/user", {
-
         method: "POST",
         body: JSON.stringify({
             name,
@@ -38,11 +37,8 @@ export async function getReg({ name, login, password }) {
         }
 }
 
-export async function getAuth({ login, password, token}) {
+export async function getAuth({ login, password}) {
     const response = await fetch("https://wedev-api.sky.pro/api/user/login", {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
         method: "POST",
         body: JSON.stringify({
             login,
