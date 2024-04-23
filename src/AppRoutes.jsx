@@ -29,13 +29,13 @@ function AppRoutes() {
     <>
       <Routes>
         <Route element={<PrivateRoute isAuth={isAuth} />}>
-          <Route path={Paths.MAIN} element={<MainPage token={token}/>}>
+          <Route path={Paths.MAIN} element={<MainPage token={token} />}>
             <Route path={Paths.CARD} element={<CardPage />} />
             <Route path={Paths.EXIT} element={<ExitPage setIsAuth={setIsAuth} />} />
           </Route>
         </Route>
         <Route path={Paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth} setToken={setToken} />} />
-        <Route path={Paths.REGISTER} element={<RegisterPage  setIsAuth={setIsAuth}/>} />
+        <Route path={Paths.REGISTER} element={<RegisterPage setIsAuth={setIsAuth} />} />
         <Route path={Paths.ERROR} element={<NotFoundPage />} />
       </Routes>
     </>

@@ -17,9 +17,9 @@ function Register({ setIsAuth }) {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		setError(null);
-		getReg({ name: name, login: login, password: password }).then((user) => {
+		getReg({ name: name, login: login, password: password }).then((userData) => {
 			//throw new Error("Ошибка сервера");
-			console.log(user);
+			console.log(userData);
 			setIsAuth(true);
 			navigate(Paths.LOGIN);
 		}).catch((err) => {
@@ -48,7 +48,7 @@ function Register({ setIsAuth }) {
 							<S.ModalInput type="text" placeholder="Имя" label="Имя" value={name} onChange={(e) => setName(e.target.value)} />
 							<S.ModalInput type="email" placeholder="Эл. почта" label="Эл. почта" value={login} onChange={(e) => setLogin(e.target.value)} />
 							<S.ModalInput type="password" placeholder="Пароль" label="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
-							{error && "Такой пользователь уже существует"}
+							{error && <p>{error}</p>}
 							<S.ModalBtn id="SignUpEnter" type="submit">Зарегистрироваться</S.ModalBtn>
 							<S.ModalFormGroup>
 								<p>Уже есть аккаунт?  <Link to={Paths.LOGIN}>Войдите здесь</Link>

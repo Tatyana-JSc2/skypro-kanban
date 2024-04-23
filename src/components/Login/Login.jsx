@@ -17,9 +17,9 @@ function Login({ setIsAuth, setToken }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         setError(null);
-        getAuth({ login: login, password: password }).then((user) => {
-            console.log(user);
-            setToken(user.token);
+        getAuth({ login: login, password: password }).then((userData) => {
+            console.log(userData);
+            setToken(userData.user.token);
             setIsAuth(true);
             navigate(Paths.MAIN);
         }).catch((err) => {
@@ -54,7 +54,7 @@ function Login({ setIsAuth, setToken }) {
                             <S.ModalInput type="password" placeholder="Пароль" value={password}
                                 onChange={(e) => setPassword(e.target.value)} />
                             <S.ModalBtnEnter type="submit">Войти</S.ModalBtnEnter>
-                            {error && "Пользователя с такими данными не существует. Введите корректный логин и пароль или зарегистрируйтесь."}
+                            {error && <p>{error}</p>}
                             <S.ModalFormGroup>
                                 <p>Нужно зарегистрироваться?</p>
                                 <Link to={Paths.REGISTER}>Регистрируйтесь здесь</Link>
