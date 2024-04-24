@@ -6,7 +6,7 @@ import CardPage from './pages/CardPage'
 import LoginPage from './pages/LoginPage'
 import NotFoundPage from './pages/NotFoundPage'
 import RegisterPage from './pages/RegisterPage'
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useNavigate } from "react-router-dom"
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
 
@@ -17,25 +17,49 @@ function AppRoutes() {
   //  const user = localStorage.getItem("user");
   //  return (user? true : false);
   // }
+  //function getUserFromLocalStorage() {
+  //  try {
+  //    return JSON.parse(window.localStorage.getItem("user"));
+  //  } catch (error) {
+  //    return null;
+  //  }
+  // }
 
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(JSON.parse(localStorage.getItem("user")));
   const [token, setToken] = useState(null);
-  // const getToken = () => {
-  //   const token = user ? `Bearer ${user.token}` : undefined;
-  //   return token;
-  // };
+  const navigate = useNavigate();
+
+  
+
+  function exit() {
+    localStorage.removeItem("user");
+    setIsAuth(null);
+    navigate(Paths.LOGIN);
+  }
+
+  function userLogin(newUser) {
+    setToken(newUser.token);
+    localStorage.setItem("user", JSON.stringify(newUser));
+    setIsAuth(JSON.parse(localStorage.getItem("user")));
+    navigate(Paths.MAIN);
+  }
+  function userReg(newUser) {
+    localStorage.setItem("user", JSON.stringify(newUser));
+    setIsAuth(JSON.parse(localStorage.getItem("user")));
+    navigate(Paths.LOGIN);
+  }
 
   return (
     <>
       <Routes>
         <Route element={<PrivateRoute isAuth={isAuth} />}>
-          <Route path={Paths.MAIN} element={<MainPage token={token} />}>
+          <Route path={Paths.MAIN} element={<MainPage token={token}/>}>
             <Route path={Paths.CARD} element={<CardPage />} />
-            <Route path={Paths.EXIT} element={<ExitPage setIsAuth={setIsAuth} />} />
+            <Route path={Paths.EXIT} element={<ExitPage exit={exit} />} />
           </Route>
         </Route>
-        <Route path={Paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth} setToken={setToken} />} />
-        <Route path={Paths.REGISTER} element={<RegisterPage setIsAuth={setIsAuth} />} />
+        <Route path={Paths.LOGIN} element={<LoginPage setIsAuth={setIsAuth} setToken={setToken} userLogin={userLogin} />} />
+        <Route path={Paths.REGISTER} element={<RegisterPage setIsAuth={setIsAuth} userReg={userReg} />} />
         <Route path={Paths.ERROR} element={<NotFoundPage />} />
       </Routes>
     </>

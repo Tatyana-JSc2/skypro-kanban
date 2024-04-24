@@ -1,6 +1,7 @@
+
 //const token = "bgc0b8awbwas6g5g5k5o5s5w606g37w3cc3bo3b83k39s3co3c83c03ck";
 
-export async function getTasks({token}) {
+export async function getTasks({ token }) {
     const response = await fetch("https://wedev-api.sky.pro/api/kanban", {
         headers: {
             Authorization: `Bearer ${token}`,
@@ -8,9 +9,13 @@ export async function getTasks({token}) {
         method: "GET",
     });
 
-    if (!response.ok) {
-        throw new Error("Ошибка сервера");
-    }
+    if (response.status === 401) {
+        throw new Error("Нет авторизации");
+    } else
+
+        if (!response.ok) {
+            throw new Error("Ошибка сервера");
+        };
 
     const data = await response.json();
 
@@ -37,7 +42,7 @@ export async function getReg({ name, login, password }) {
         }
 }
 
-export async function getAuth({ login, password}) {
+export async function getAuth({ login, password }) {
     const response = await fetch("https://wedev-api.sky.pro/api/user/login", {
         method: "POST",
         body: JSON.stringify({

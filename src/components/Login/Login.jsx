@@ -7,21 +7,19 @@ import * as S from "./Login.styled";
 
 
 
-function Login({ setIsAuth, setToken }) {
+function Login({ setIsAuth, setToken, userLogin }) {
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
+        //event.preventDefault();
         setError(null);
-        getAuth({ login: login, password: password }).then((userData) => {
-            console.log(userData);
-            setToken(userData.user.token);
-            setIsAuth(true);
-            navigate(Paths.MAIN);
+        await getAuth({ login: login, password: password }).then((data) => {
+            console.log(data.user);
+            userLogin(data.user);
         }).catch((err) => {
             setError(err.message);
             console.log(err.message);

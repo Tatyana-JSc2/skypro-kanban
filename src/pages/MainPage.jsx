@@ -10,18 +10,19 @@ import { getTasks } from '../api';
 
 //<Header setTaskList={setTaskList} taskList={taskList} />
 
-const MainPage = ({ token }) => {
+const MainPage = ({token}) => {
 
   const [taskList, setTaskList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getTasks({ token: token }).then((data) => {
+    getTasks({token:token}).then((data) => {
       //throw new Error("Ошибка сервера");
       setTaskList(data.tasks);
     }).catch((err) => {
       setError(err.message);
+      console.log(err.message);
     }).finally(() => {
       setIsLoading(false);
     });

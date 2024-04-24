@@ -6,22 +6,23 @@ import * as S from "./Register.styled";
 import { useState } from "react";
 
 
-function Register({ setIsAuth }) {
+function Register({ setIsAuth, userReg }) {
 
-	const navigate = useNavigate();
+	//const navigate = useNavigate();
 	const [name, setName] = useState('');
 	const [login, setLogin] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(null);
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+
+	const handleSubmit = async()  => {
+		
 		setError(null);
-		getReg({ name: name, login: login, password: password }).then((userData) => {
+		await getReg({ name: name, login: login, password: password }).then((data) => {
 			//throw new Error("Ошибка сервера");
-			console.log(userData);
-			setIsAuth(true);
-			navigate(Paths.LOGIN);
+			console.log(data);
+			userReg(data.user);
+			
 		}).catch((err) => {
 			setError(err.message);
 			console.log(err.message);
