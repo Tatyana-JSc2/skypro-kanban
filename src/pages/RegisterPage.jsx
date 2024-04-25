@@ -1,9 +1,9 @@
 import React from 'react'
 import Register from '../components/Register/Register'
 
-const RegisterPage = ({setIsAuth, userReg}) => {
+const RegisterPage = ({userReg}) => {
   return (
-    <Register setIsAuth={setIsAuth} userReg={userReg}/>
+    <Register userReg={userReg}/>
   )
 }
 export default RegisterPage

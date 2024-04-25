@@ -42,7 +42,7 @@ export async function getReg({ name, login, password }) {
         }
 }
 
-export async function getAuth({ login, password }) {
+export async function getAuth({login, password}) {
     const response = await fetch("https://wedev-api.sky.pro/api/user/login", {
         method: "POST",
         body: JSON.stringify({

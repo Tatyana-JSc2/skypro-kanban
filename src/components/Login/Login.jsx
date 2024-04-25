@@ -7,19 +7,22 @@ import * as S from "./Login.styled";
 
 
 
-function Login({ setIsAuth, setToken, userLogin }) {
+function Login({setUser}) {
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
-    const handleSubmit = async () => {
-        //event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         setError(null);
-        await getAuth({ login: login, password: password }).then((data) => {
+        await getAuth({login:login, password:password}).then((data) => {
             console.log(data.user);
-            userLogin(data.user);
+            //userLogin(data.user);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            setUser(data.user);
+            navigate(Paths.MAIN);
         }).catch((err) => {
             setError(err.message);
             console.log(err.message);
@@ -46,12 +49,12 @@ function Login({ setIsAuth, setToken, userLogin }) {
                         <div className="modal__ttl">
                             <h2>Вход</h2>
                         </div>
-                        <S.ModalFormLogin onSubmit={handleSubmit} >
+                        <S.ModalFormLogin >
                             <S.ModalInput type="email" placeholder="Эл. почта" value={login}
                                 onChange={(e) => setLogin(e.target.value)} />
                             <S.ModalInput type="password" placeholder="Пароль" value={password}
                                 onChange={(e) => setPassword(e.target.value)} />
-                            <S.ModalBtnEnter type="submit">Войти</S.ModalBtnEnter>
+                            <S.ModalBtnEnter type="button" onClick={handleSubmit}>Войти</S.ModalBtnEnter>
                             {error && <p>{error}</p>}
                             <S.ModalFormGroup>
                                 <p>Нужно зарегистрироваться?</p>

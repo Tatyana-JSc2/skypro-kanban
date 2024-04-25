@@ -6,7 +6,7 @@ import * as S from "./Register.styled";
 import { useState } from "react";
 
 
-function Register({ setIsAuth, userReg }) {
+function Register({ userReg }) {
 
 	//const navigate = useNavigate();
 	const [name, setName] = useState('');
@@ -15,14 +15,14 @@ function Register({ setIsAuth, userReg }) {
 	const [error, setError] = useState(null);
 
 
-	const handleSubmit = async()  => {
-		
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 		setError(null);
 		await getReg({ name: name, login: login, password: password }).then((data) => {
 			//throw new Error("Ошибка сервера");
 			console.log(data);
 			userReg(data.user);
-			
+
 		}).catch((err) => {
 			setError(err.message);
 			console.log(err.message);
@@ -45,12 +45,12 @@ function Register({ setIsAuth, userReg }) {
 						<S.ModalTtl>
 							<h2>Регистрация</h2>
 						</S.ModalTtl>
-						<S.ModalFormLogin onSubmit={handleSubmit}>
+						<S.ModalFormLogin >
 							<S.ModalInput type="text" placeholder="Имя" label="Имя" value={name} onChange={(e) => setName(e.target.value)} />
 							<S.ModalInput type="email" placeholder="Эл. почта" label="Эл. почта" value={login} onChange={(e) => setLogin(e.target.value)} />
 							<S.ModalInput type="password" placeholder="Пароль" label="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
 							{error && <p>{error}</p>}
-							<S.ModalBtn id="SignUpEnter" type="submit">Зарегистрироваться</S.ModalBtn>
+							<S.ModalBtn id="SignUpEnter" type="button" onClick={handleSubmit}>Зарегистрироваться</S.ModalBtn>
 							<S.ModalFormGroup>
 								<p>Уже есть аккаунт?  <Link to={Paths.LOGIN}>Войдите здесь</Link>
 								</p>
