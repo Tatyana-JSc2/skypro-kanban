@@ -13,23 +13,11 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
 function AppRoutes() {
 
-  //function User() {
-  //  const user = localStorage.getItem("user");
-  //  return (user? true : false);
-  // }
-  //function getUserFromLocalStorage() {
-  //  try {
-  //    return JSON.parse(window.localStorage.getItem("user"));
-  //  } catch (error) {
-  //    return null;
-  //  }
-  // }
 
-  const [user, setUser] = useState(null);
-  //const [token, setToken] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const navigate = useNavigate();
 
-
+  //JSON.parse(localStorage.getItem("user"))
 
   function exit() {
     localStorage.removeItem("user");
@@ -37,11 +25,11 @@ function AppRoutes() {
     navigate(Paths.LOGIN);
   }
 
-  //function userLogin(newUser) {
-  //  setToken(newUser.token);
-  //  localStorage.setItem("user", JSON.stringify(newUser));
-  //  setIsAuth(JSON.parse(localStorage.getItem("user")));
-  //  navigate(Paths.MAIN);
+  // function userLogin(newUser) {
+  //   setToken(newUser.token);
+  // localStorage.setItem("user", JSON.stringify(newUser));
+  //setUser(newUser);
+  // navigate(Paths.MAIN);
   //}
   function userReg(newUser) {
     localStorage.setItem("user", JSON.stringify(newUser));

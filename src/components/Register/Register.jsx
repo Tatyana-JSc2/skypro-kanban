@@ -49,7 +49,7 @@ function Register({ userReg }) {
 							<S.ModalInput type="text" placeholder="Имя" label="Имя" value={name} onChange={(e) => setName(e.target.value)} />
 							<S.ModalInput type="email" placeholder="Эл. почта" label="Эл. почта" value={login} onChange={(e) => setLogin(e.target.value)} />
 							<S.ModalInput type="password" placeholder="Пароль" label="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
-							{error && <p>{error}</p>}
+							{error && <p style={{color:"red"}}>{error}</p>}
 							<S.ModalBtn id="SignUpEnter" type="button" onClick={handleSubmit}>Зарегистрироваться</S.ModalBtn>
 							<S.ModalFormGroup>
 								<p>Уже есть аккаунт?  <Link to={Paths.LOGIN}>Войдите здесь</Link>

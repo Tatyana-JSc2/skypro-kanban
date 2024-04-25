@@ -14,13 +14,12 @@ const statusList = [
 ];
 
 //<Header/>
-function MainBlock({ setTaskList, taskList, isLoading, error }) {
+function MainBlock({ setTaskList, taskList, isLoading, error, user }) {
 	return (
 		<>
 			<S.Main>
+				<Header setTaskList={setTaskList} taskList={taskList} user={user}/>
 				{isLoading ? "Данные загружаются" : (error && "Произошла ошибка, попробуйте позже...") || <>
-					<Header setTaskList={setTaskList} taskList={taskList} />
-
 					<Container>
 						<S.MainBlock>
 							<S.MainContent>

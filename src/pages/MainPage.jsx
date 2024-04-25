@@ -30,7 +30,7 @@ const MainPage = ({user}) => {
 
   return (
     <>
-      <MainBlock setTaskList={setTaskList} taskList={taskList} isLoading={isLoading} error={error} />
+      <MainBlock setTaskList={setTaskList} taskList={taskList} isLoading={isLoading} error={error} user={user}/>
       <Outlet />
     </>
   )

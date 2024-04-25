@@ -12,14 +12,12 @@ export async function getTasks({ token }) {
     if (response.status === 401) {
         throw new Error("Нет авторизации");
     } else
-
         if (!response.ok) {
             throw new Error("Ошибка сервера");
-        };
-
-    const data = await response.json();
-
-    return data;
+        } else {
+            const data = await response.json();
+            return data;
+        }
 }
 
 export async function getReg({ name, login, password }) {
@@ -32,7 +30,7 @@ export async function getReg({ name, login, password }) {
         }),
     });
     if (response.status === 400) {
-        throw new Error("Такой пользователь уже существует");
+        throw new Error("Пользователь с таким логином уже сущетсвует");
     } else
         if (!response.ok) {
             throw new Error("Ошибка сервера");
@@ -42,7 +40,7 @@ export async function getReg({ name, login, password }) {
         }
 }
 
-export async function getAuth({login, password}) {
+export async function getAuth({ login, password }) {
     const response = await fetch("https://wedev-api.sky.pro/api/user/login", {
         method: "POST",
         body: JSON.stringify({
@@ -50,9 +48,13 @@ export async function getAuth({login, password}) {
             password,
         }),
     });
-    if (response.status === 401) {
-        throw new Error("Нет авторизации");
-    };
-    const data = await response.json();
-    return data;
+    if (response.status === 400) {
+        throw new Error("Передан неправильный логин или пароль");
+    } else
+        if (!response.ok) {
+            throw new Error("Ошибка сервера");
+        } else {
+            const data = await response.json();
+            return data;
+        }
 }

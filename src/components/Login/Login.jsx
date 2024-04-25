@@ -7,7 +7,7 @@ import * as S from "./Login.styled";
 
 
 
-function Login({setUser}) {
+function Login({ setUser }) {
 
     const navigate = useNavigate();
     const [login, setLogin] = useState('');
@@ -17,7 +17,7 @@ function Login({setUser}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-        await getAuth({login:login, password:password}).then((data) => {
+        await getAuth({ login: login, password: password }).then((data) => {
             console.log(data.user);
             //userLogin(data.user);
             localStorage.setItem("user", JSON.stringify(data.user));
@@ -36,10 +36,6 @@ function Login({setUser}) {
     //}
 
 
-    // localStorage.setItem("user", JSON.stringify(newUser));
-    //    setIsAuth(newUser);//newUser нужно получить из апи
-    //    navigate(Paths.MAIN);
-    //{auth && <h2 style={{color:"red"}}>"Пользователя с такими данными не существует. Введите корректный логин и пароль или зарегистрируйтесь."</h2>}
     //{error && "Пользователя с такими данными не существует. Введите корректный логин и пароль или зарегистрируйтесь."}
     return (
         <div className="wrapper">
@@ -55,7 +51,7 @@ function Login({setUser}) {
                             <S.ModalInput type="password" placeholder="Пароль" value={password}
                                 onChange={(e) => setPassword(e.target.value)} />
                             <S.ModalBtnEnter type="button" onClick={handleSubmit}>Войти</S.ModalBtnEnter>
-                            {error && <p>{error}</p>}
+                            {error && <p style={{ color: "red" }}>{error}</p>}
                             <S.ModalFormGroup>
                                 <p>Нужно зарегистрироваться?</p>
                                 <Link to={Paths.REGISTER}>Регистрируйтесь здесь</Link>
