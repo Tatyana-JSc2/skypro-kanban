@@ -8,6 +8,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import RegisterPage from './pages/RegisterPage'
 import { Route, Routes, useNavigate } from "react-router-dom"
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
+import NewCardPage from './pages/NewCardPage'
 
 
 
@@ -43,6 +44,7 @@ function AppRoutes() {
         <Route element={<PrivateRoute user={user} />}>
           <Route path={Paths.MAIN} element={<MainPage user={user} />}>
             <Route path={Paths.CARD} element={<CardPage />} />
+            <Route path={Paths.NEWCARD} element={<NewCardPage />} />
             <Route path={Paths.EXIT} element={<ExitPage exit={exit} />} />
           </Route>
         </Route>

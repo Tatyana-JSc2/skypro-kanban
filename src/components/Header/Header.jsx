@@ -22,6 +22,7 @@ function Header({ setTaskList, taskList, user }) {
 		setTaskList([...taskList, newTask]);
 	}
 
+	//onClick={addTask}
 	//className="header__user _hover02"
 	return (
 		<S.Header >
@@ -34,12 +35,12 @@ function Header({ setTaskList, taskList, user }) {
 						<Link to={Paths.MAIN}><img src="images/logo_dark.png" alt="logo" /></Link>
 					</S.HeaderLogo>
 					<S.HeaderNav className="header__nav">
-						<S.HeaderBtn onClick={addTask} id="btnMainNew">Создать новую задачу</S.HeaderBtn>
+						<S.HeaderBtn id="btnMainNew" type="button"><Link to={Paths.NEWCARD}>Создать новую задачу</Link></S.HeaderBtn>
 						<S.HeaderUser onClick={popUserSetName} href="#user-set-target">{user.name}</S.HeaderUser>
 						{isOpen &&
 							<S.HeaderPopUserSet id="user-set-target">
 								{/*<a href="">x</a> */}
-								<S.PopUserSetName>Ivan Ivanov</S.PopUserSetName>
+								<S.PopUserSetName>{user.name}</S.PopUserSetName>
 								<S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
 								<S.PopUserSetTheme className="pop-user-set__theme">
 									<p>Темная тема</p>
