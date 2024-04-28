@@ -14,7 +14,7 @@ export function Columns({ status, newCardList }) {
             <S1.Cards>
                 {
                     newCardList.map((card) =>
-                        <Cards key={card.id}{...card} />)
+                        <Cards key={card._id}{...card} />)
                 }
 
             </S1.Cards>

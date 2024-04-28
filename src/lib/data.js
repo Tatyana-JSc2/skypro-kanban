@@ -1,4 +1,5 @@
-export const cardList=[
+//при переходе на работу с апи theme заменяется на topic в Cards.jsx
+export const cardList = [
     {
         id: "1",
         theme: "Web Design",
@@ -52,7 +53,7 @@ export const cardList=[
         theme: "Research",
         title: "Название задачи",
         date: "30.10.23",
-        status:  "В работе"
+        status: "В работе"
 
     },
     {
@@ -60,7 +61,7 @@ export const cardList=[
         theme: "Copywriting",
         title: "Название задачи",
         date: "30.10.23",
-        status:  "В работе"
+        status: "В работе"
 
     },
     {
@@ -68,7 +69,7 @@ export const cardList=[
         theme: "Web Design",
         title: "Название задачи",
         date: "30.10.23",
-        status:  "В работе"
+        status: "В работе"
 
     },
     {

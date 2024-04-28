@@ -14,22 +14,23 @@ const statusList = [
 ];
 
 //<Header/>
-function MainBlock({ taskList, isLoading }) {
+function MainBlock({ setTaskList, taskList, isLoading, error, user }) {
 	return (
 		<>
-		<S.Main>
-			<Container>
-
-				<S.MainBlock>
-					<S.MainContent>
-						{isLoading ? "Данные загружаются" : statusList.map((status, index) =>
-							<Columns status={status} key={index} newCardList={taskList.filter((card) => card.status === status)} />
-						)
-						}
-					</S.MainContent>
-				</S.MainBlock>
-			</Container>
-		</S.Main>
+			<S.Main>
+				<Header setTaskList={setTaskList} taskList={taskList} user={user}/>
+				{isLoading ? "Данные загружаются" : (error && "Произошла ошибка, попробуйте позже...") || <>
+					<Container>
+						<S.MainBlock>
+							<S.MainContent>
+								{statusList.map((status, index) =>
+									<Columns status={status} key={index} newCardList={taskList.filter((card) => card.status === status)} />)
+								}
+							</S.MainContent>
+						</S.MainBlock>
+					</Container></>
+				}
+			</S.Main>
 		</>
 	)
 }

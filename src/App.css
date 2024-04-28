@@ -12,13 +12,6 @@
 }
 
 
-.wrapper {
-  max-width: 100%;
-  width: 100vw;
-  min-height: 100vh;
-  overflow: hidden;
-  background-color: #F1F1F1;
-}
 
 
 
@@ -757,5 +750,123 @@
   }
   .pop-exit__form-group {
     display: block;
+  }
+}
+
+
+
+
+
+/*login стили*/
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: #EAEEF6;
+}
+
+.container-signin {
+  display: block;
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+._hover01:hover {
+  background-color: #33399b;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal__block {
+  display: block;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  max-width: 368px;
+  width: 100%;
+  padding: 50px 60px;
+  border-radius: 10px;
+  border: 0.7px solid #D4DBE5;
+  box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
+}
+.modal__ttl h2 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: -0.6px;
+  margin-bottom: 20px;
+}
+
+
+
+@media screen and (max-width: 375px) {
+  .modal {
+    background-color: #FFFFFF;
+  }
+  .modal__block {
+    max-width: 368px;
+    width: 100%;
+    padding: 0 16px;
+    border-radius: none;
+    border: none;
+    box-shadow: none;
+  }
+  .modal__btn-enter {
+    height: 40px;
+  }
+}
+
+
+
+
+
+/*register стили*/
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+div,
+button,
+a {
+  font-family: "Roboto", sans-serif;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: #EAEEF6;
+}
+
+@media screen and (max-width: 375px) {
+  .modal {
+    background-color: #FFFFFF;
+  }
+  .modal__block {
+    max-width: 368px;
+    width: 100%;
+    padding: 0 16px;
+    border-radius: none;
+    border: none;
+    box-shadow: none;
+  }
+  .modal__btn-signup-ent {
+    height: 40px;
   }
 }

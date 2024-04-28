@@ -1,22 +1,68 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Paths } from "../../lib/paths"
+import '../../App.css'
+import { useState } from "react";
+import { getAuth } from "../../api";
+import * as S from "./Login.styled";
 
-function Login({ setIsAuth }) {
+
+
+function Login({ setUser }) {
 
     const navigate = useNavigate();
-    function login() {
-        //... проверить логин и пароль на сервере, если существуют, то реализуем дальнейшую логику, если нет, то пишем 'введите корректные данные' и перенаправляем зарегистрироваться.
-        localStorage.setItem("user", "user");
-        setIsAuth(true);
-        navigate(Paths.MAIN);
-    }
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError(null);
+        await getAuth({ login: login, password: password }).then((data) => {
+            console.log(data.user);
+            //userLogin(data.user);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            setUser(data.user);
+            navigate(Paths.MAIN);
+        }).catch((err) => {
+            setError(err.message);
+            console.log(err.message);
+        });
+    };
+
+    //function Try() {
+    //	localStorage.setItem("user", "user");
+    //	setIsAuth(true);
+    //navigate(Paths.MAIN);
+    //}
+
+
+    //{error && "Пользователя с такими данными не существует. Введите корректный логин и пароль или зарегистрируйтесь."}
     return (
-        <div>
-            <h2>страница логина</h2>
-            <button type="button" onClick={login}>Войти</button>
+        <div className="wrapper">
+            <div className="container-signin">
+                <div className="modal">
+                    <div className="modal__block">
+                        <div className="modal__ttl">
+                            <h2>Вход</h2>
+                        </div>
+                        <S.ModalFormLogin >
+                            <S.ModalInput type="email" placeholder="Эл. почта" value={login}
+                                onChange={(e) => setLogin(e.target.value)} />
+                            <S.ModalInput type="password" placeholder="Пароль" value={password}
+                                onChange={(e) => setPassword(e.target.value)} />
+                            <S.ModalBtnEnter type="button" onClick={handleSubmit}>Войти</S.ModalBtnEnter>
+                            {error && <p style={{ color: "red" }}>{error}</p>}
+                            <S.ModalFormGroup>
+                                <p>Нужно зарегистрироваться?</p>
+                                <Link to={Paths.REGISTER}>Регистрируйтесь здесь</Link>
+                            </S.ModalFormGroup>
+                        </S.ModalFormLogin>
+
+                    </div>
+                </div>
+            </div>
         </div>
     )
-}
+};
 
-export default Login
+export default Login;

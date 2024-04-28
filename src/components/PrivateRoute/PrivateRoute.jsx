@@ -4,8 +4,9 @@ import { Paths } from "../../lib/paths";
 
 
 
-function PrivateRoute({isAuth}) {
-    return (isAuth ? <Outlet /> : <Navigate to={Paths.LOGIN}/>);
+function PrivateRoute({user}) {
+    return (user ? <Outlet /> : <Navigate to={Paths.LOGIN}/>);
 }
 
 export default PrivateRoute;
+

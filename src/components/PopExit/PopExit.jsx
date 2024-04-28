@@ -1,15 +1,8 @@
 import { Link, useNavigate } from "react-router-dom"
 import { Paths } from "../../lib/paths"
 
-function PopExit({ setIsAuth }) {
-
-	const navigate = useNavigate();
-	function exit() {
-		localStorage.setItem("user", "");
-		setIsAuth(falce);
-		navigate(Paths.LOGIN);
-	}
-
+function PopExit({exit}) {
+//const navigate = useNavigate();
 	return (
 		<div className="pop-exit" id="popExit">
 			<div className="pop-exit__container">

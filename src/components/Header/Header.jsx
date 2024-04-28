@@ -4,7 +4,7 @@ import { Container } from "../../styles/shared";
 import { Link } from "react-router-dom";
 import { Paths } from "../../lib/paths";
 
-function Header({ setTaskList, taskList }) {
+function Header({ setTaskList, taskList, user }) {
 
 	const [isOpen, setIsOpen] = useState(false);
 	const popUserSetName = () => {
@@ -35,7 +35,7 @@ function Header({ setTaskList, taskList }) {
 					</S.HeaderLogo>
 					<S.HeaderNav className="header__nav">
 						<S.HeaderBtn onClick={addTask} id="btnMainNew">Создать новую задачу</S.HeaderBtn>
-						<S.HeaderUser onClick={popUserSetName} href="#user-set-target">Ivan Ivanov</S.HeaderUser>
+						<S.HeaderUser onClick={popUserSetName} href="#user-set-target">{user.name}</S.HeaderUser>
 						{isOpen &&
 							<S.HeaderPopUserSet id="user-set-target">
 								{/*<a href="">x</a> */}

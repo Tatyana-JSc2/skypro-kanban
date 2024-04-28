@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import * as S from "./Cards.styled"
 
 
-export function Cards({ theme, title, date, id, status }) {
+export function Cards({ topic, title, date, _id, status }) {
     const GetColor = (anyTheme) => {
         switch (anyTheme) {
             case "Web Design":
@@ -20,10 +20,10 @@ export function Cards({ theme, title, date, id, status }) {
             <S.CardsItem >
                 <S.CardsCard >
                     <S.CardGroup >
-                        <S.CardTheme $topicColor={GetColor(theme)}>
-                            <p >{theme}</p>
+                        <S.CardTheme $topicColor={GetColor(topic)}>
+                            <p >{topic}</p>
                         </S.CardTheme>
-                        <Link to={`/card/${id}`}>
+                        <Link to={`/card/${_id}`}>
                             <S.CardBtn >
                                 <div></div>
                                 <div></div>
