@@ -4,15 +4,17 @@ import '../../App.css'
 import { useState } from "react";
 import { getAuth } from "../../api";
 import * as S from "./Login.styled";
+import { useUser } from "../../context/hooks/useUser";
 
 
 
-function Login({ setUser }) {
+function Login() {
 
     const navigate = useNavigate();
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const { setUser } = useUser();
 
     const handleSubmit = async (e) => {
         e.preventDefault();

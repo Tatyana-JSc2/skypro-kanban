@@ -1,4 +1,5 @@
 
+import { useTasks } from "../../context/hooks/useTasks";
 import { Container } from "../../styles/shared";
 import { Columns } from "../Columns/Columns";
 import Header from "../Header/Header";
@@ -14,11 +15,13 @@ const statusList = [
 ];
 
 //<Header/>
-function MainBlock({ setTaskList, taskList, isLoading, error, user }) {
+function MainBlock({ isLoading, error }) {
+	const { taskList } = useTasks();
+
 	return (
 		<>
 			<S.Main>
-				<Header setTaskList={setTaskList} taskList={taskList} user={user}/>
+				<Header />
 				{isLoading ? "Данные загружаются" : (error && "Произошла ошибка, попробуйте позже...") || <>
 					<Container>
 						<S.MainBlock>

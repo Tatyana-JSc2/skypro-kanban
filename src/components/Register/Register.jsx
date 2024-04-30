@@ -1,18 +1,20 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Paths } from "../../lib/paths"
 import '../../App.css'
 import { getReg } from "../../api";
 import * as S from "./Register.styled";
 import { useState } from "react";
+import { useUser } from "../../context/hooks/useUser";
 
 
-function Register({ userReg }) {
+function Register() {
 
-	//const navigate = useNavigate();
+
 	const [name, setName] = useState('');
 	const [login, setLogin] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(null);
+	const { userReg } = useUser();
 
 
 	const handleSubmit = async (e) => {
@@ -49,7 +51,7 @@ function Register({ userReg }) {
 							<S.ModalInput type="text" placeholder="Имя" label="Имя" value={name} onChange={(e) => setName(e.target.value)} />
 							<S.ModalInput type="email" placeholder="Эл. почта" label="Эл. почта" value={login} onChange={(e) => setLogin(e.target.value)} />
 							<S.ModalInput type="password" placeholder="Пароль" label="Пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
-							{error && <p style={{color:"red"}}>{error}</p>}
+							{error && <p style={{ color: "red" }}>{error}</p>}
 							<S.ModalBtn id="SignUpEnter" type="button" onClick={handleSubmit}>Зарегистрироваться</S.ModalBtn>
 							<S.ModalFormGroup>
 								<p>Уже есть аккаунт?  <Link to={Paths.LOGIN}>Войдите здесь</Link>

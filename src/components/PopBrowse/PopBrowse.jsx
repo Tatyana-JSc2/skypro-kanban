@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom"
 import { Paths } from "../../lib/paths"
 import Calendar from "../Calendar/Calendar"
 import * as S from "./PopBrouse.styled";
+import '../../App.css'
 
 
 

@@ -3,26 +3,16 @@ import * as S from "./Header.styled";
 import { Container } from "../../styles/shared";
 import { Link } from "react-router-dom";
 import { Paths } from "../../lib/paths";
+import { useUser } from "../../context/hooks/useUser";
 
-function Header({ setTaskList, taskList, user }) {
-
+function Header() {
+	const {user} = useUser();
 	const [isOpen, setIsOpen] = useState(false);
 	const popUserSetName = () => {
 		setIsOpen(!isOpen);
 	};
+	
 
-	function addTask() {
-		const newTask = {
-			id: taskList.length + 1,
-			theme: "Неизвестно",
-			title: "Новая задача",
-			date: "30.10.23",
-			status: "Без статуса"
-		};
-		setTaskList([...taskList, newTask]);
-	}
-
-	//onClick={addTask}
 	//className="header__user _hover02"
 	return (
 		<S.Header >
@@ -41,7 +31,7 @@ function Header({ setTaskList, taskList, user }) {
 							<S.HeaderPopUserSet id="user-set-target">
 								{/*<a href="">x</a> */}
 								<S.PopUserSetName>{user.name}</S.PopUserSetName>
-								<S.PopUserSetMail>ivan.ivanov@gmail.com</S.PopUserSetMail>
+								<S.PopUserSetMail>{user.login}</S.PopUserSetMail>
 								<S.PopUserSetTheme className="pop-user-set__theme">
 									<p>Темная тема</p>
 									<input type="checkbox" name="checkbox" />
