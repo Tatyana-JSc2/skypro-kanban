@@ -29,7 +29,7 @@ export async function postTasks({ title, topic, status, description, date, token
         body: JSON.stringify({
             title,
             topic,
-            //status,
+            status,
             description,
             date,
         }),

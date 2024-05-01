@@ -8,6 +8,7 @@ import '../../App.css'
 
 function PopBrowse() {
 	const { id } = useParams();
+
 	return (
 		<S.PopBrowse>
 			<S.PopBrowseContainer>

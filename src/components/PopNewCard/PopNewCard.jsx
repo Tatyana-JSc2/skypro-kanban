@@ -3,8 +3,9 @@ import '../../App.css'
 import { useState } from "react";
 import { postTasks } from "../../api";
 import { useUser } from "../../context/hooks/useUser";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTasks } from "../../context/hooks/useTasks";
+import { Paths } from "../../lib/paths";
 
 
 
@@ -17,7 +18,7 @@ function PopNewCard() {
 	const [newTask, setNewTask] = useState({
 		title: "",
 		topic: "",
-		//status: "",
+		status: "Без статуса",
 		description: "",
 		date: "",
 	});
@@ -56,7 +57,7 @@ function PopNewCard() {
 				<div className="pop-new-card__block">
 					<div className="pop-new-card__content">
 						<h3 className="pop-new-card__ttl">Создание задачи</h3>
-						<a href="#" className="pop-new-card__close">&#10006;</a>
+						<Link to={Paths.MAIN}><a href="#" className="pop-new-card__close">&#10006;</a></Link>
 						<div className="pop-new-card__wrap">
 							<form className="pop-new-card__form form-new" id="formNewCard" action="#">
 								<div className="form-new__block">

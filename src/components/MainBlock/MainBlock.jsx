@@ -26,8 +26,8 @@ function MainBlock({ isLoading, error }) {
 					<Container>
 						<S.MainBlock>
 							<S.MainContent>
-								{statusList.map((status, index) =>
-									<Columns status={status} key={index} newCardList={taskList.filter((card) => card.status === status)} />)
+								{statusList.map((Status, index) =>
+									<Columns status={Status} key={index} newCardList={taskList.filter((card) => card.status === Status)} />)
 								}
 							</S.MainContent>
 						</S.MainBlock>
