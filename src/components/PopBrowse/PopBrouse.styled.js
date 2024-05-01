@@ -100,3 +100,10 @@ export const StatusPSubttl = styled.p`
   line-height: 1;
 }
 `
+export const StatusThemes = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+`
