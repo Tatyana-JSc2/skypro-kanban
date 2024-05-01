@@ -1,8 +1,9 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Paths } from "../../lib/paths"
+import { useUser } from "../../context/hooks/useUser";
 
-function PopExit({exit}) {
-//const navigate = useNavigate();
+function PopExit() {
+	const { exit } = useUser();
 	return (
 		<div className="pop-exit" id="popExit">
 			<div className="pop-exit__container">

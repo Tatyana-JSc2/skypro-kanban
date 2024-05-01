@@ -1,22 +1,26 @@
 import { Link, useParams } from "react-router-dom"
 import { Paths } from "../../lib/paths"
 import Calendar from "../Calendar/Calendar"
+import * as S from "./PopBrouse.styled";
+import '../../App.css'
+
+
 
 function PopBrowse() {
 	const { id } = useParams();
 	return (
-		<div className="pop-browse" id="popBrowse">
-			<div className="pop-browse__container">
-				<div className="pop-browse__block">
-					<div className="pop-browse__content">
-						<div className="pop-browse__top-block">
-							<h3 className="pop-browse__ttl">Задача {id}</h3>
-							<div className="categories__theme theme-top _orange _active-category">
-								<p className="_orange">Web Design</p>
-							</div>
-						</div>
-						<div className="pop-browse__status status">
-							<p className="status__p subttl">Статус</p>
+		<S.PopBrowse>
+			<S.PopBrowseContainer>
+				<S.PopBrowseBblock>
+					<S.PopBrowseContent>
+						<S.PopBrowseTopBlock>
+							<S.PopBrowseTtl>Задача {id}</S.PopBrowseTtl>
+							<S.PopBrowseContentAnd>
+								<S.Orange>Web Design</S.Orange>
+							</S.PopBrowseContentAnd>
+						</S.PopBrowseTopBlock>
+						<S.PopBrowseStatusStatus>
+							<S.StatusPSubttl>Статус</S.StatusPSubttl>
 							<div className="status__themes">
 								<div className="status__theme _hide">
 									<p>Без статуса</p>
@@ -34,7 +38,7 @@ function PopBrowse() {
 									<p>Готово</p>
 								</div>
 							</div>
-						</div>
+						</S.PopBrowseStatusStatus>
 						<div className="pop-browse__wrap">
 							<form className="pop-browse__form form-browse" id="formBrowseCard" action="#">
 								<div className="form-browse__block">
@@ -66,10 +70,10 @@ function PopBrowse() {
 							<button className="btn-edit__close _btn-bg _hover01"><a href="#">Закрыть</a></button>
 						</div>
 
-					</div>
-				</div>
-			</div>
-		</div>
+					</S.PopBrowseContent>
+				</S.PopBrowseBblock>
+			</S.PopBrowseContainer>
+		</S.PopBrowse>
 	)
 }
 
