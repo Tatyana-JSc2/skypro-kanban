@@ -74,9 +74,9 @@ function PopNewCard() {
 						<div className="pop-new-card__categories categories">
 							<p className="categories__p subttl">Категория</p>
 							<div className="categories__themes">
-								<label><input type="radio" value="Web Design" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Web Design</label>
-								<label><input type="radio" value="Research" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Research</label>
-								<label><input type="radio" value="Copywriting" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Copywritin</label>
+								<label><input type="radio" value="Web Design" name="topic" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Web Design</label>
+								<label><input type="radio" value="Research" name="topic" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Research</label>
+								<label><input type="radio" value="Copywriting" name="topic" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Copywritin</label>
 								{/*<div className="categories__theme _orange _active-category">
 									<p className="_orange">Web Design</p>
 								</div>

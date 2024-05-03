@@ -1,24 +1,72 @@
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { Paths } from "../../lib/paths"
 import Calendar from "../Calendar/Calendar"
 import * as S from "./PopBrouse.styled";
 import '../../App.css'
 import { useTasks } from "../../context/hooks/useTasks";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { changeTasks, deleteTask, } from "../../api";
+import { useUser } from "../../context/hooks/useUser";
 
 
 
 function PopBrowse() {
+	const { setTaskList, taskList } = useTasks();
+	const { user } = useUser();
 	const [selected, setSelected] = useState();
-	const { taskList } = useTasks();
+	const navigate = useNavigate();
+	const [error, setError] = useState(null);
 	const { id } = useParams();
-	const [text, setText] = useState('');
+	//const [text, setText] = useState('');
+	const [changeTask, setChangeTask] = useState(someTask());
+	const input = useRef();
 
-	const selectedTask = taskList.find((task) => task._id === id);
-	console.log(selectedTask);
-	setSelected(selectedTask.date);
-	setText(selectedTask.description);
-	//Web Design
+	function someTask() {
+		try {
+			//someFunction()
+			const selectedTask = taskList.find((task) => task._id === id);
+			return selectedTask;
+		} catch (err) {
+			console.log(err.message);
+		}
+	};
+
+	console.log(someTask().topic);
+
+	function Redaсt() {
+		input.current.readOnly = false;
+	}
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setError(null);
+		const postChangeTask = { ...changeTask, date: selected };
+		await changeTasks({ ...postChangeTask, id: id, token: user?.token }).then((data) => {
+			//throw new Error("Ошибка сервера");
+			setTaskList(data.tasks);
+			console.log(data);
+			navigate(-1);
+		}).catch((err) => {
+			setError(err.message);
+		});
+	};
+
+	const buttonDeleteTask = async (e) => {
+		//e.preventDefault();
+		setError(null);
+		await deleteTask({ id: id, token: user?.token }).then((data) => {
+			//throw new Error("Ошибка сервера");
+			setTaskList(data.tasks);
+			console.log(data);
+			navigate(Paths.MAIN);
+		}).catch((err) => {
+			setError(err.message);
+			console.log(err.message);
+		});
+	};
+
+
+
 	return (
 		<S.PopBrowse>
 			<S.PopBrowseContainer>
@@ -27,48 +75,48 @@ function PopBrowse() {
 						<S.PopBrowseTopBlock>
 							<S.PopBrowseTtl>Задача {id}</S.PopBrowseTtl>
 							<S.PopBrowseContentAnd>
-								<S.Orange>{selectedTask.topic}</S.Orange>
+								<S.Orange>{someTask().topic}</S.Orange>
 							</S.PopBrowseContentAnd>
 						</S.PopBrowseTopBlock>
 						<S.PopBrowseStatusStatus>
 							<S.StatusPSubttl>Статус</S.StatusPSubttl>
 							<S.StatusThemes>
-								<div className="status__theme _hide">
+								<S.StatusTheme className="_hide">
 									<p>Без статуса</p>
-								</div>
-								<div className="status__theme _gray">
-									<p className="_gray">Нужно сделать</p>
-								</div>
-								<div className="status__theme _hide">
+								</S.StatusTheme>
+								<S.StatusTheme className="_gray">
+									<p className="_gray">{someTask().status}</p>
+								</S.StatusTheme>
+								<S.StatusTheme className="_hide">
 									<p>В работе</p>
-								</div>
-								<div className="status__theme _hide">
+								</S.StatusTheme>
+								<S.StatusTheme className="_hide">
 									<p>Тестирование</p>
-								</div>
-								<div className="status__theme _hide">
+								</S.StatusTheme>
+								<S.StatusTheme className="_hide">
 									<p>Готово</p>
-								</div>
+								</S.StatusTheme>
 							</S.StatusThemes>
 						</S.PopBrowseStatusStatus>
-						<div className="pop-browse__wrap">
-							<form className="pop-browse__form form-browse" id="formBrowseCard" action="#">
-								<div className="form-browse__block">
-									<label htmlFor="textArea01" className="subttl">Описание задачи</label>
-									<textarea className="form-browse__area" name="text" id="textArea01" readOnly placeholder="Введите описание задачи..." value={text} onChange={event => setText(event.target.value)}></textarea>
-								</div>
-							</form>
+						<S.PopBrowseWrap>
+							<S.PopBrowseFormFormBrowse id="formBrowseCard" action="#">
+								<S.FormBrowseBlock>
+									<S.Subttl htmlFor="textArea01">Описание задачи</S.Subttl>
+									<S.FormBrowseArea name="text" id="textArea01" ref={input} readOnly placeholder="Введите описание задачи..." value={changeTask.description} onChange={(e) => setChangeTask({ ...changeTask, description: e.target.value })}></S.FormBrowseArea>
+								</S.FormBrowseBlock>
+							</S.PopBrowseFormFormBrowse>
 							<Calendar selected={selected} setSelected={setSelected} />
-						</div>
+						</S.PopBrowseWrap>
 						<div className="theme-down__categories theme-down">
-							<p className="categories__p subttl">Категория</p>
-							<div className="categories__theme _orange _active-category">
-								<p className="_orange">{selectedTask.topic}</p>
-							</div>
+							<S.CategoriesPSubttl>Категория</S.CategoriesPSubttl>
+							<S.CategoriesThemeOrangeActiveCategory>
+								<S.Orange>{someTask().topic}</S.Orange>
+							</S.CategoriesThemeOrangeActiveCategory>
 						</div>
 						<div className="pop-browse__btn-browse ">
 							<div className="btn-group">
-								<button className="btn-browse__edit _btn-bor _hover03"><a href="#">Редактировать задачу</a></button>
-								<button className="btn-browse__delete _btn-bor _hover03"><a href="#">Удалить задачу</a></button>
+								<button className="btn-browse__edit _btn-bor _hover03" onClick={Redaсt}><a href="#">Редактировать задачу</a></button>
+								<button className="btn-browse__delete _btn-bor _hover03" onClick={buttonDeleteTask}><a href="#">Удалить задачу</a></button>
 							</div>
 							<button className="btn-browse__close _btn-bg _hover01"><Link to={Paths.MAIN}>Закрыть</Link></button>
 						</div>

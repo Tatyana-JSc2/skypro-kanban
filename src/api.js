@@ -44,6 +44,45 @@ export async function postTasks({ title, topic, status, description, date, token
 }
 
 
+export async function changeTasks({ title, topic, status, description, date, id, token }) {
+    const response = await fetch("https://wedev-api.sky.pro/api/kanban"+`/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        method: "PUT",
+        body: JSON.stringify({
+            title,
+            topic,
+            status,
+            description,
+            date,
+        }),
+    });
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error);
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}
+
+
+export async function deleteTask({ id, token }) {
+    const response = await fetch("https://wedev-api.sky.pro/api/kanban"+`/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        method: "DELETE",
+    });
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error);
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}
 
 export async function getReg({ name, login, password }) {
     const response = await fetch("https://wedev-api.sky.pro/api/user", {
