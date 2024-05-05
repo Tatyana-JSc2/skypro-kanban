@@ -4,7 +4,7 @@ import Calendar from "../Calendar/Calendar"
 import * as S from "./PopBrouse.styled";
 import '../../App.css'
 import { useTasks } from "../../context/hooks/useTasks";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { changeTasks, deleteTask, } from "../../api";
 import { useUser } from "../../context/hooks/useUser";
 
@@ -33,6 +33,10 @@ function PopBrowse() {
 			console.log(err.message);
 		}
 	};
+
+	useEffect(() => {
+		setSelected(someTask().date);
+	}, [someTask()]);
 
 	console.log(someTask().topic);
 
