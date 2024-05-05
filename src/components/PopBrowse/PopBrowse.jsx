@@ -20,11 +20,14 @@ function PopBrowse() {
 	//const [text, setText] = useState('');
 	const [changeTask, setChangeTask] = useState(someTask());
 	const input = useRef();
+	const button = useRef();
+	const [red, setRed] = useState(false);
 
 	function someTask() {
 		try {
 			//someFunction()
 			const selectedTask = taskList.find((task) => task._id === id);
+			//setSelected(selectedTask.date);
 			return selectedTask;
 		} catch (err) {
 			console.log(err.message);
@@ -35,6 +38,12 @@ function PopBrowse() {
 
 	function Redaсt() {
 		input.current.readOnly = false;
+		setRed(!red);
+	}
+
+	const changeStatus = (e) => {
+		setChangeTask({ ...changeTask, status: e.target.value });
+		button.current.$highlighted = true;
 	}
 
 	const handleSubmit = async (e) => {
@@ -45,7 +54,8 @@ function PopBrowse() {
 			//throw new Error("Ошибка сервера");
 			setTaskList(data.tasks);
 			console.log(data);
-			navigate(-1);
+			navigate(Paths.MAIN);
+			setRed(!red);
 		}).catch((err) => {
 			setError(err.message);
 		});
@@ -73,7 +83,7 @@ function PopBrowse() {
 				<S.PopBrowseBblock>
 					<S.PopBrowseContent>
 						<S.PopBrowseTopBlock>
-							<S.PopBrowseTtl>Задача {id}</S.PopBrowseTtl>
+							<S.PopBrowseTtl>{someTask().title}</S.PopBrowseTtl>
 							<S.PopBrowseContentAnd>
 								<S.Orange>{someTask().topic}</S.Orange>
 							</S.PopBrowseContentAnd>
@@ -81,28 +91,31 @@ function PopBrowse() {
 						<S.PopBrowseStatusStatus>
 							<S.StatusPSubttl>Статус</S.StatusPSubttl>
 							<S.StatusThemes>
-								<S.StatusTheme className="_hide">
+								{!red && <S.StatusTheme $highlighted value={someTask().status}>
+									<p >{someTask().status}</p>
+								</S.StatusTheme>}
+								{red && <S.StatusTheme ref={button} $highlighted={false} value="Без статуса" onClick={changeStatus}>
 									<p>Без статуса</p>
-								</S.StatusTheme>
-								<S.StatusTheme className="_gray">
-									<p className="_gray">{someTask().status}</p>
-								</S.StatusTheme>
-								<S.StatusTheme className="_hide">
+								</S.StatusTheme>}
+								{red && <S.StatusTheme ref={button} $highlighted={false} value="Нужно сделать" onClick={changeStatus}>
+									<p >Нужно сделать</p>
+								</S.StatusTheme>}
+								{red && <S.StatusTheme ref={button} $highlighted={false} value="В работе" onClick={changeStatus}>
 									<p>В работе</p>
-								</S.StatusTheme>
-								<S.StatusTheme className="_hide">
+								</S.StatusTheme>}
+								{red && <S.StatusTheme ref={button} $highlighted={false} value="Тестирование" onClick={changeStatus}>
 									<p>Тестирование</p>
-								</S.StatusTheme>
-								<S.StatusTheme className="_hide">
+								</S.StatusTheme>}
+								{red && <S.StatusTheme ref={button} $highlighted={false} value="Готово" onClick={changeStatus}>
 									<p>Готово</p>
-								</S.StatusTheme>
+								</S.StatusTheme>}
 							</S.StatusThemes>
 						</S.PopBrowseStatusStatus>
 						<S.PopBrowseWrap>
 							<S.PopBrowseFormFormBrowse id="formBrowseCard" action="#">
 								<S.FormBrowseBlock>
 									<S.Subttl htmlFor="textArea01">Описание задачи</S.Subttl>
-									<S.FormBrowseArea name="text" id="textArea01" ref={input} readOnly placeholder="Введите описание задачи..." value={changeTask.description} onChange={(e) => setChangeTask({ ...changeTask, description: e.target.value })}></S.FormBrowseArea>
+									<S.FormBrowseArea name="text" id="textArea01" ref={input} readOnly placeholder="Введите описание задачи..." defaultValue={changeTask.description} onChange={(e) => setChangeTask({ ...changeTask, description: e.target.value })}></S.FormBrowseArea>
 								</S.FormBrowseBlock>
 							</S.PopBrowseFormFormBrowse>
 							<Calendar selected={selected} setSelected={setSelected} />
@@ -115,7 +128,9 @@ function PopBrowse() {
 						</div>
 						<div className="pop-browse__btn-browse ">
 							<div className="btn-group">
-								<button className="btn-browse__edit _btn-bor _hover03" onClick={Redaсt}><a href="#">Редактировать задачу</a></button>
+								{red && <button className="btn-browse__edit _btn-bor _hover03" onClick={handleSubmit}><a href="#">Сохранить</a></button>}
+								{red && <button className="btn-browse__edit _btn-bor _hover03" ><a href="#" onClick={Redaсt}>Отменить</a></button>}
+								{!red && <button className="btn-browse__edit _btn-bor _hover03" onClick={Redaсt}><a href="#">Редактировать задачу</a></button>}
 								<button className="btn-browse__delete _btn-bor _hover03" onClick={buttonDeleteTask}><a href="#">Удалить задачу</a></button>
 							</div>
 							<button className="btn-browse__close _btn-bg _hover01"><Link to={Paths.MAIN}>Закрыть</Link></button>
