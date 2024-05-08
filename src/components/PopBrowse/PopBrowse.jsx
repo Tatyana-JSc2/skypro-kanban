@@ -11,21 +11,23 @@ import { useUser } from "../../context/hooks/useUser";
 
 
 function PopBrowse() {
-	const { setTaskList, taskList } = useTasks();
+	const { setTaskList, taskList, statusList } = useTasks();
 	const { user } = useUser();
 	const [selected, setSelected] = useState();
 	const navigate = useNavigate();
 	const [error, setError] = useState(null);
 	const { id } = useParams();
-	//const [text, setText] = useState('');
 	const [changeTask, setChangeTask] = useState(someTask());
 	const input = useRef();
-	const button = useRef();
 	const [red, setRed] = useState(false);
+	const [isActive, setIsActive] = useState(false);
+	const [style, setStyle] = useState({
+		backgroundColor: ' #FFFFFF',
+		color: '#94a6be',
+	});
 
 	function someTask() {
 		try {
-			//someFunction()
 			const selectedTask = taskList.find((task) => task._id === id);
 			//setSelected(selectedTask.date);
 			return selectedTask;
@@ -45,9 +47,17 @@ function PopBrowse() {
 		setRed(!red);
 	}
 
-	const changeStatus = (e) => {
-		setChangeTask({ ...changeTask, status: e.target.value });
-		button.current.$highlighted = true;
+	const changeStatus = (e, Status) => {
+		setChangeTask({ ...changeTask, status: Status });
+		console.log(Status);
+		setIsActive(!isActive);
+		e.target.style = {
+			backgroundColor: isActive ? '#94a6be' : ' #FFFFFF',
+			color: isActive ? '#FFFFFF' : '#94a6be',
+		};
+		console.log(e.target.style);
+		setStyle(e.target.style);
+		//e.target.style.backgroundColor = '#94a6be';
 	}
 
 	const handleSubmit = async (e) => {
@@ -80,7 +90,6 @@ function PopBrowse() {
 	};
 
 
-
 	return (
 		<S.PopBrowse>
 			<S.PopBrowseContainer>
@@ -98,21 +107,9 @@ function PopBrowse() {
 								{!red && <S.StatusTheme $highlighted value={someTask().status}>
 									<p >{someTask().status}</p>
 								</S.StatusTheme>}
-								{red && <S.StatusTheme ref={button} $highlighted={false} value="Без статуса" onClick={changeStatus}>
-									<p>Без статуса</p>
-								</S.StatusTheme>}
-								{red && <S.StatusTheme ref={button} $highlighted={false} value="Нужно сделать" onClick={changeStatus}>
-									<p >Нужно сделать</p>
-								</S.StatusTheme>}
-								{red && <S.StatusTheme ref={button} $highlighted={false} value="В работе" onClick={changeStatus}>
-									<p>В работе</p>
-								</S.StatusTheme>}
-								{red && <S.StatusTheme ref={button} $highlighted={false} value="Тестирование" onClick={changeStatus}>
-									<p>Тестирование</p>
-								</S.StatusTheme>}
-								{red && <S.StatusTheme ref={button} $highlighted={false} value="Готово" onClick={changeStatus}>
-									<p>Готово</p>
-								</S.StatusTheme>}
+
+								{red && statusList.map((Status, index) => <S.StatusTheme onClick={(e) => changeStatus(e, Status)}>
+									<p >{Status}</p></S.StatusTheme>)}
 							</S.StatusThemes>
 						</S.PopBrowseStatusStatus>
 						<S.PopBrowseWrap>
@@ -151,7 +148,7 @@ function PopBrowse() {
 					</S.PopBrowseContent>
 				</S.PopBrowseBblock>
 			</S.PopBrowseContainer>
-		</S.PopBrowse>
+		</S.PopBrowse >
 	)
 }
 

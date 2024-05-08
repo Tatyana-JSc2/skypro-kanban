@@ -6,17 +6,17 @@ import Header from "../Header/Header";
 import * as S from "./MainBlock.styled";
 
 
-const statusList = [
-	"Без статуса",
-	"Нужно сделать",
-	"В работе",
-	"Тестирование",
-	"Готово",
-];
+//const statusList = [
+//	"Без статуса",
+//	"Нужно сделать",
+//	"В работе",
+//	"Тестирование",
+//	"Готово",
+//];
 
 //<Header/>
 function MainBlock({ isLoading, error }) {
-	const { taskList } = useTasks();
+	const { taskList, statusList } = useTasks();
 
 	return (
 		<>

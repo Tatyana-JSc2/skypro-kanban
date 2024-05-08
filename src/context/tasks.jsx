@@ -7,7 +7,13 @@ export const TasksContext = createContext();
 export const TasksProvider = ({ children }) => {
     const [taskList, setTaskList] = useState([]);
 
-
+    const statusList = [
+        "Без статуса",
+        "Нужно сделать",
+        "В работе",
+        "Тестирование",
+        "Готово",
+    ];
     //const navigate = useNavigate();
     // function userReg(newUser) {
     //     localStorage.setItem("user", JSON.stringify(newUser));
@@ -15,7 +21,7 @@ export const TasksProvider = ({ children }) => {
     //     navigate(Paths.LOGIN);
     // }
 
-    return <TasksContext.Provider value={{ taskList, setTaskList }}>
+    return <TasksContext.Provider value={{ taskList, setTaskList, statusList }}>
         {children}
     </TasksContext.Provider>;
 };

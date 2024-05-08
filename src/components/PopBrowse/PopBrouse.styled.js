@@ -112,7 +112,6 @@ export const StatusTheme = styled.button`
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   background: ${props => props.$highlighted ? '#94a6be': ' #FFFFFF'};
   color: ${props => props.$highlighted ? '#FFFFFF': '#94a6be'};
-  //color: #FFFFFF;
   padding: 11px 14px 10px;
   margin-right: 7px;
   margin-bottom: 7px;
