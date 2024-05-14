@@ -7,6 +7,19 @@ export const TasksContext = createContext();
 export const TasksProvider = ({ children }) => {
     const [taskList, setTaskList] = useState([]);
 
+    const GetColor = (anyTheme) => {
+        switch (anyTheme) {
+            case "Web Design":
+                return "_orange"
+            case "Research":
+                return "_green"
+            case "Copywriting":
+                return "_purple"
+            default:
+                return "_gray"
+        }
+    }
+
     const statusList = [
         "Без статуса",
         "Нужно сделать",
@@ -14,14 +27,9 @@ export const TasksProvider = ({ children }) => {
         "Тестирование",
         "Готово",
     ];
-    //const navigate = useNavigate();
-    // function userReg(newUser) {
-    //     localStorage.setItem("user", JSON.stringify(newUser));
-    //    setUser(newUser);
-    //     navigate(Paths.LOGIN);
-    // }
+    
 
-    return <TasksContext.Provider value={{ taskList, setTaskList, statusList }}>
+    return <TasksContext.Provider value={{ taskList, setTaskList, statusList, GetColor }}>
         {children}
     </TasksContext.Provider>;
 };

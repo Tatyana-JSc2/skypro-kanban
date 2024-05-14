@@ -1,20 +1,10 @@
 import { Link } from "react-router-dom"
 import * as S from "./Cards.styled"
+import { useTasks } from "../../context/hooks/useTasks";
 
 
 export function Cards({ topic, title, date, _id, status }) {
-    const GetColor = (anyTheme) => {
-        switch (anyTheme) {
-            case "Web Design":
-                return "_orange"
-            case "Research":
-                return "_green"
-            case "Copywriting":
-                return "_purple"
-            default:
-                return "_gray"
-        }
-    }
+    const { GetColor } = useTasks();
     return (
         <S.Cards>
             <S.CardsItem >
