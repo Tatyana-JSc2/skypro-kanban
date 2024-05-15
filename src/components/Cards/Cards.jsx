@@ -3,7 +3,7 @@ import * as S from "./Cards.styled"
 import { useTasks } from "../../context/hooks/useTasks";
 
 
-export function Cards({ topic, title, date, _id, status }) {
+export function Cards({ topic, title, date, _id}) {
     const { GetColor } = useTasks();
     return (
         <S.Cards>

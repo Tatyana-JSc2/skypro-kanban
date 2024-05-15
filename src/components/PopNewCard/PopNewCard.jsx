@@ -1,5 +1,4 @@
 import Calendar from "../Calendar/Calendar"
-import '../../App.css'
 import { useState } from "react";
 import { postTasks } from "../../api";
 import { useUser } from "../../context/hooks/useUser";
@@ -27,10 +26,8 @@ function PopNewCard() {
 
 	const changeTopic = (value) => {
 		setNewTask({ ...newTask, topic: value });
-		setisActiv(newTask.topic);
-		//console.log(newTask);
+		setisActiv(value);
 	};
-
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -70,10 +67,7 @@ function PopNewCard() {
 						<S.PopNewCardCategoriesCategories>
 							<S.CategoriesPSubttl>Категория</S.CategoriesPSubttl>
 							<S.CategoriesThemes>
-								{/*<label><input type="radio" value="Web Design" name="topic" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Web Design</label>
-								<label><input type="radio" value="Research" name="topic" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Research</label>
-	<label><input type="radio" value="Copywriting" name="topic" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Copywritin</label>*/}
-								<S.CategoriesThemeOrange type="button" $isActiv={isActiv === "Web Design"}  onClick={(e) => changeTopic('Web Design')}>
+								<S.CategoriesThemeOrange type="button" $isActiv={isActiv === "Web Design"} onClick={(e) => changeTopic('Web Design')}>
 									Web Design
 								</S.CategoriesThemeOrange>
 								<S.CategoriesThemeGreen type="button" $isActiv={isActiv === "Research"} value="Research" onClick={(e) => changeTopic('Research')}>
@@ -82,10 +76,6 @@ function PopNewCard() {
 								<S.CategoriesThemePurple type="button" $isActiv={isActiv === "Copywriting"} value="Copywriting" onClick={(e) => changeTopic('Copywriting')}>
 									Copywriting
 								</S.CategoriesThemePurple>
-
-								{/*<S.CategoriesThemeOrange><input type="radio" value="Web Design" name="topic" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Web Design</S.CategoriesThemeOrange>
-								<S.CategoriesThemeOrange><input type="radio" value="Research" name="topic" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Research</S.CategoriesThemeOrange>*/}
-
 							</S.CategoriesThemes>
 						</S.PopNewCardCategoriesCategories>
 						{error && <p style={{ color: "red" }}>{error}</p>}

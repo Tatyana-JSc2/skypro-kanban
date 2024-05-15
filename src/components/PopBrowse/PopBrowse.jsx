@@ -2,7 +2,6 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { Paths } from "../../lib/paths"
 import Calendar from "../Calendar/Calendar"
 import * as S from "./PopBrouse.styled";
-import '../../App.css'
 import { useTasks } from "../../context/hooks/useTasks";
 import { useEffect, useRef, useState } from "react";
 import { changeTasks, deleteTask, } from "../../api";
@@ -36,7 +35,7 @@ function PopBrowse() {
 		setSelected(someTask().date);
 	}, [someTask()]);
 
-	console.log(someTask().topic);
+	//console.log(someTask().topic);
 
 	function Redaсt() {
 		input.current.readOnly = false;
@@ -48,9 +47,6 @@ function PopBrowse() {
 		setRed(!red);
 	}
 
-	//const changeDescription = (e) => {
-	//	setChangeTask({ ...changeTask, description: e.target.value });
-	//};
 
 	const changeStatus = (e, Status) => {
 		setChangeTask({ ...changeTask, status: Status });

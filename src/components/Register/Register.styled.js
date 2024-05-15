@@ -7,17 +7,15 @@ export const Wrapper = styled.div`
   overflow-x: hidden;
   overflow-y: scroll;
   background-color: #EAEEF6;
-
   font-family: "Roboto", sans-serif;
 `
-export const ContainerSignup = styled.div`
 
+//${SH.Hover01}
+export const ContainerSignup = styled.div`
   display: block;
   width: 100vw;
   min-height: 100vh;
   margin: 0 auto;
-
-  ${SH.Hover01}
 `
 export const Modal = styled.div`
   width: 100%;

@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
 import { Paths } from "../../lib/paths"
-import '../../App.css'
 import { useState } from "react";
 import { getAuth } from "../../api";
 import * as S from "./Login.styled";
@@ -31,22 +30,15 @@ function Login() {
         });
     };
 
-    //function Try() {
-    //	localStorage.setItem("user", "user");
-    //	setIsAuth(true);
-    //navigate(Paths.MAIN);
-    //}
 
-
-    //{error && "Пользователя с такими данными не существует. Введите корректный логин и пароль или зарегистрируйтесь."}
     return (
-        <div className="wrapper">
-            <div className="container-signin">
-                <div className="modal">
-                    <div className="modal__block">
-                        <div className="modal__ttl">
-                            <h2>Вход</h2>
-                        </div>
+        <S.Wrapper>
+            <S.ContainerSignin>
+                <S.Modal>
+                    <S.ModalBlock>
+                        <S.ModalTtlH2>
+                            <>Вход</>
+                        </S.ModalTtlH2>
                         <S.ModalFormLogin >
                             <S.ModalInput type="email" placeholder="Эл. почта" value={login}
                                 onChange={(e) => setLogin(e.target.value)} />
@@ -60,10 +52,10 @@ function Login() {
                             </S.ModalFormGroup>
                         </S.ModalFormLogin>
 
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </S.ModalBlock>
+                </S.Modal>
+            </S.ContainerSignin>
+        </S.Wrapper>
     )
 };
 

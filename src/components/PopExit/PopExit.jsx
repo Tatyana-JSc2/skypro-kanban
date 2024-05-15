@@ -1,25 +1,26 @@
 import { Link } from "react-router-dom"
 import { Paths } from "../../lib/paths"
 import { useUser } from "../../context/hooks/useUser";
+import * as S from "./PopExit.styled";
 
 function PopExit() {
 	const { exit } = useUser();
 	return (
-		<div className="pop-exit" id="popExit">
-			<div className="pop-exit__container">
-				<div className="pop-exit__block">
-					<div className="pop-exit__ttl">
-						<h2>Выйти из аккаунта?</h2>
-					</div>
-					<form className="pop-exit__form" id="formExit" action="#">
-						<div className="pop-exit__form-group">
-							<button className="pop-exit__exit-yes _hover01" id="exitYes" onClick={exit}>Да, выйти</button>
-							<button className="pop-exit__exit-no _hover03" id="exitNo"><Link to={Paths.MAIN}>Нет, остаться</Link> </button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+		<S.PopExit id="popExit">
+			<S.PopExitContainer>
+				<S.PopExitBlock>
+					<S.PopExitTtlH2>
+						Выйти из аккаунта?
+					</S.PopExitTtlH2>
+					<S.PopExitForm id="formExit" action="#">
+						<S.PopExitFormGroup>
+							<S.PopExitExitYes id="exitYes" onClick={exit}><p>Да, выйти</p></S.PopExitExitYes>
+							<S.PopExitExitNo id="exitNo"><Link to={Paths.MAIN}><p>Нет, остаться</p></Link></S.PopExitExitNo>
+						</S.PopExitFormGroup>
+					</S.PopExitForm>
+				</S.PopExitBlock>
+			</S.PopExitContainer>
+		</S.PopExit>
 	)
 }
 
