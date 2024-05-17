@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom"
 import * as S from "./Cards.styled"
 import { useTasks } from "../../context/hooks/useTasks";
+import { format } from "date-fns";
 
 
 export function Cards({ topic, title, date, _id}) {
     const { GetColor } = useTasks();
+    const result = format(new Date(date),'MM.dd.yy');
+    
     return (
         <S.Cards>
             <S.CardsItem >
@@ -37,7 +40,7 @@ export function Cards({ topic, title, date, _id}) {
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <p>{date}</p>
+                            <p>{result}</p>
                         </S.CardDate>
                     </S.CardContent>
                 </S.CardsCard>

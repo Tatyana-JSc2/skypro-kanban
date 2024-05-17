@@ -178,6 +178,7 @@ margin-right: 8px;
 `
 export const BtnBrowseButton = styled.button`
   height: 30px;
+  margin-right: 7px;
   margin-bottom: 10px;
   padding: 0 14px;
   border-radius: 4px;

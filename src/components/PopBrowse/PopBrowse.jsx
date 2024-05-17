@@ -48,7 +48,7 @@ function PopBrowse() {
 	}
 
 
-	const changeStatus = (e, Status) => {
+	const changeStatus = (Status) => {
 		setChangeTask({ ...changeTask, status: Status });
 		//console.log(Status);
 		setisStatus(Status);
@@ -69,7 +69,7 @@ function PopBrowse() {
 		});
 	};
 
-	const buttonDeleteTask = async (e) => {
+	const buttonDeleteTask = async () => {
 		//e.preventDefault();
 		setError(null);
 		await deleteTask({ id: id, token: user?.token }).then((data) => {
@@ -79,7 +79,7 @@ function PopBrowse() {
 			navigate(Paths.MAIN);
 		}).catch((err) => {
 			setError(err.message);
-			console.log(err.message);
+			console.log(error);
 		});
 	};
 
@@ -102,8 +102,9 @@ function PopBrowse() {
 									<p >{someTask().status}</p>
 								</S.StatusTheme>}
 
-								{red && statusList.map((Status, index) => <S.StatusTheme $isChecked={Status === isStatus} onClick={(e) => changeStatus(e, Status)}>
+								{red && statusList.map((Status) => <S.StatusTheme key={Status} $isChecked={Status === isStatus} onClick={() => changeStatus(Status)}>
 									<p >{Status}</p></S.StatusTheme>)}
+
 							</S.StatusThemes>
 						</S.PopBrowseStatusStatus>
 						<S.PopBrowseWrap>

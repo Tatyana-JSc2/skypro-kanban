@@ -57,6 +57,6 @@ function Login() {
             </S.ContainerSignin>
         </S.Wrapper>
     )
-};
+}
 
 export default Login;

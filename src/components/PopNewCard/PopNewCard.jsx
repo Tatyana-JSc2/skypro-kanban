@@ -67,13 +67,13 @@ function PopNewCard() {
 						<S.PopNewCardCategoriesCategories>
 							<S.CategoriesPSubttl>Категория</S.CategoriesPSubttl>
 							<S.CategoriesThemes>
-								<S.CategoriesThemeOrange type="button" $isActiv={isActiv === "Web Design"} onClick={(e) => changeTopic('Web Design')}>
+								<S.CategoriesThemeOrange type="button" $isActiv={isActiv === "Web Design"} onClick={() => changeTopic('Web Design')}>
 									Web Design
 								</S.CategoriesThemeOrange>
-								<S.CategoriesThemeGreen type="button" $isActiv={isActiv === "Research"} value="Research" onClick={(e) => changeTopic('Research')}>
+								<S.CategoriesThemeGreen type="button" $isActiv={isActiv === "Research"} value="Research" onClick={() => changeTopic('Research')}>
 									Research
 								</S.CategoriesThemeGreen>
-								<S.CategoriesThemePurple type="button" $isActiv={isActiv === "Copywriting"} value="Copywriting" onClick={(e) => changeTopic('Copywriting')}>
+								<S.CategoriesThemePurple type="button" $isActiv={isActiv === "Copywriting"} value="Copywriting" onClick={() => changeTopic('Copywriting')}>
 									Copywriting
 								</S.CategoriesThemePurple>
 							</S.CategoriesThemes>
