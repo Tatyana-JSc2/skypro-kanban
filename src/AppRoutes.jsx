@@ -1,4 +1,3 @@
-import React from 'react'
 import { Paths } from './lib/paths'
 import MainPage from './pages/MainPage'
 import ExitPage from './pages/ExitPage'
