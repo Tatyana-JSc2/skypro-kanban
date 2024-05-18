@@ -1,10 +1,8 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "../lib/paths";
 
 export const UserContext = createContext();
-//const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-//const navigate = useNavigate();
 
 function checkUser() {
     try {

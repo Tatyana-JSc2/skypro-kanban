@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import { Paths } from "../../lib/paths"
-import '../../App.css'
 import { getReg } from "../../api";
 import * as S from "./Register.styled";
 import { useState } from "react";
@@ -31,13 +30,6 @@ function Register() {
 		});
 	};
 
-
-	//function Try() {
-	//	localStorage.setItem("user", "user");
-	//	setIsAuth(true);
-	//	navigate(Paths.LOGIN);
-	//}
-	//{error && "Такой пользователь уже существует"}
 
 	return (
 		<S.Wrapper>

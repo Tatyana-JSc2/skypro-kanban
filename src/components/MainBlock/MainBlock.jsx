@@ -6,17 +6,9 @@ import Header from "../Header/Header";
 import * as S from "./MainBlock.styled";
 
 
-const statusList = [
-	"Без статуса",
-	"Нужно сделать",
-	"В работе",
-	"Тестирование",
-	"Готово",
-];
-
 //<Header/>
 function MainBlock({ isLoading, error }) {
-	const { taskList } = useTasks();
+	const { taskList, statusList } = useTasks();
 
 	return (
 		<>
@@ -26,8 +18,8 @@ function MainBlock({ isLoading, error }) {
 					<Container>
 						<S.MainBlock>
 							<S.MainContent>
-								{statusList.map((status, index) =>
-									<Columns status={status} key={index} newCardList={taskList.filter((card) => card.status === status)} />)
+								{statusList.map((Status, index) =>
+									<Columns status={Status} key={index} newCardList={taskList.filter((card) => card.status === Status)} />)
 								}
 							</S.MainContent>
 						</S.MainBlock>

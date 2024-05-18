@@ -35,4 +35,10 @@ body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   color: #000000;
 }
+
+div,
+button,
+a {
+  font-family: "Roboto", sans-serif;
+}
 `

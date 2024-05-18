@@ -1,4 +1,3 @@
-import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { Paths } from "../../lib/paths";
 import { useUser } from "../../context/hooks/useUser";

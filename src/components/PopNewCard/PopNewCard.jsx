@@ -1,11 +1,11 @@
 import Calendar from "../Calendar/Calendar"
-import '../../App.css'
 import { useState } from "react";
 import { postTasks } from "../../api";
 import { useUser } from "../../context/hooks/useUser";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTasks } from "../../context/hooks/useTasks";
-
+import { Paths } from "../../lib/paths";
+import * as S from "./PopNewCard.styled";
 
 
 function PopNewCard() {
@@ -14,26 +14,20 @@ function PopNewCard() {
 	const [error, setError] = useState(null);
 	const navigate = useNavigate();
 	const [selected, setSelected] = useState();
+	const [isActiv, setisActiv] = useState(false);
 	const [newTask, setNewTask] = useState({
 		title: "",
 		topic: "",
-		//status: "",
+		status: "Без статуса",
 		description: "",
 		date: "",
 	});
 
-	//function addTask() {//перенесена из Header //onClick={addTask}
-	//	const newTask = {
-	//		//id: taskList.length + 1,
-	//		topic: "Неизвестно",
-	//		title: "Новая задача",
-	//		date: "30.10.23",
-	//		status: "Без статуса",
-	//		description: "Описание задачи"
-	//	};
-	//	setTaskList([...taskList, newTask]);
-	//}
 
+	const changeTopic = (value) => {
+		setNewTask({ ...newTask, topic: value });
+		setisActiv(value);
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -51,48 +45,45 @@ function PopNewCard() {
 
 
 	return (
-		<div className="pop-new-card" id="popNewCard">
-			<div className="pop-new-card__container">
-				<div className="pop-new-card__block">
-					<div className="pop-new-card__content">
-						<h3 className="pop-new-card__ttl">Создание задачи</h3>
-						<a href="#" className="pop-new-card__close">&#10006;</a>
-						<div className="pop-new-card__wrap">
-							<form className="pop-new-card__form form-new" id="formNewCard" action="#">
-								<div className="form-new__block">
-									<label htmlFor="formTitle" className="subttl">Название задачи</label>
-									<input className="form-new__input" id="formTitle" onChange={(e) => setNewTask({ ...newTask, title: e.target.value })} type="text" name="name" placeholder="Введите название задачи..." autoFocus />
-								</div>
-								<div className="form-new__block">
-									<label htmlFor="textArea" className="subttl">Описание задачи</label>
-									<textarea className="form-new__area" id="textArea" onChange={(e) => setNewTask({ ...newTask, description: e.target.value })} name="text" placeholder="Введите описание задачи..."></textarea>
-								</div>
-							</form>
+		<S.PopNewCard>
+			<S.PopNewCardContainer>
+				<S.PopNewCardBlock>
+					<S.PopNewCardContent>
+						<S.PopNewCardTtl>Создание задачи</S.PopNewCardTtl>
+						<Link to={Paths.MAIN}><S.PopNewCardClose>&#10006;</S.PopNewCardClose></Link>
+						<S.PopNewCardWrap>
+							<S.PopNewCardFormFormNew id="formNewCard" action="#">
+								<S.FormNewBlock>
+									<S.Subttl htmlFor="formTitle" >Название задачи</S.Subttl>
+									<S.FormNewInput id="formTitle" onChange={(e) => setNewTask({ ...newTask, title: e.target.value })} type="text" name="name" placeholder="Введите название задачи..." autoFocus />
+								</S.FormNewBlock>
+								<S.FormNewBlock>
+									<S.Subttl htmlFor="textArea" >Описание задачи</S.Subttl>
+									<S.FormNewArea id="textArea" onChange={(e) => setNewTask({ ...newTask, description: e.target.value })} name="text" placeholder="Введите описание задачи..."></S.FormNewArea>
+								</S.FormNewBlock>
+							</S.PopNewCardFormFormNew>
 							<Calendar selected={selected} setSelected={setSelected} />
-						</div>
-						<div className="pop-new-card__categories categories">
-							<p className="categories__p subttl">Категория</p>
-							<div className="categories__themes">
-								<label><input type="radio" value="Web Design" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Web Design</label>
-								<label><input type="radio" value="Research" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Research</label>
-								<label><input type="radio" value="Copywriting" onChange={(e) => setNewTask({ ...newTask, topic: e.target.value })} />Copywritin</label>
-								{/*<div className="categories__theme _orange _active-category">
-									<p className="_orange">Web Design</p>
-								</div>
-								<div className="categories__theme _green">
-									<p className="_green">Research</p>
-								</div>
-								<div className="categories__theme _purple">
-									<p className="_purple">Copywriting</p>
-								</div>*/}
-							</div>
-						</div>
+						</S.PopNewCardWrap>
+						<S.PopNewCardCategoriesCategories>
+							<S.CategoriesPSubttl>Категория</S.CategoriesPSubttl>
+							<S.CategoriesThemes>
+								<S.CategoriesThemeOrange type="button" $isActiv={isActiv === "Web Design"} onClick={() => changeTopic('Web Design')}>
+									Web Design
+								</S.CategoriesThemeOrange>
+								<S.CategoriesThemeGreen type="button" $isActiv={isActiv === "Research"} value="Research" onClick={() => changeTopic('Research')}>
+									Research
+								</S.CategoriesThemeGreen>
+								<S.CategoriesThemePurple type="button" $isActiv={isActiv === "Copywriting"} value="Copywriting" onClick={() => changeTopic('Copywriting')}>
+									Copywriting
+								</S.CategoriesThemePurple>
+							</S.CategoriesThemes>
+						</S.PopNewCardCategoriesCategories>
 						{error && <p style={{ color: "red" }}>{error}</p>}
-						<button className="form-new__create _hover01" id="btnCreate" onClick={handleSubmit}>Создать задачу</button>
-					</div>
-				</div>
-			</div>
-		</div>
+						<S.FormNewCreate id="btnCreate" onClick={handleSubmit}>Создать задачу</S.FormNewCreate>
+					</S.PopNewCardContent>
+				</S.PopNewCardBlock>
+			</S.PopNewCardContainer >
+		</S.PopNewCard >
 	)
 }
 

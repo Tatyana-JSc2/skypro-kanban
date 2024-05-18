@@ -1,4 +1,3 @@
-import React from 'react';
 import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -11,7 +10,7 @@ export default function Calendar({selected, setSelected}) {
         footer = <p>Вы выбрали {format(selected, 'PP', { locale: ru })}.</p>;
     }
     return (
-        <DayPicker
+        <DayPicker 
             mode="single"
             selected={selected}
             onSelect={setSelected}

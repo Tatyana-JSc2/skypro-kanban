@@ -1,5 +1,4 @@
 
-import './App.css'
 import { GlobalStyle } from './styles/global.styled'
 import { Wrapper } from './styles/shared';
 import AppRoutes from './AppRoutes';

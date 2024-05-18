@@ -1,5 +1,4 @@
 
-//const token = "bgc0b8awbwas6g5g5k5o5s5w606g37w3cc3bo3b83k39s3co3c83c03ck";
 
 export async function getTasks({ token }) {
     const response = await fetch("https://wedev-api.sky.pro/api/kanban", {
@@ -29,7 +28,7 @@ export async function postTasks({ title, topic, status, description, date, token
         body: JSON.stringify({
             title,
             topic,
-            //status,
+            status,
             description,
             date,
         }),
@@ -44,6 +43,45 @@ export async function postTasks({ title, topic, status, description, date, token
 }
 
 
+export async function changeTasks({ title, topic, status, description, date, id, token }) {
+    const response = await fetch("https://wedev-api.sky.pro/api/kanban"+`/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        method: "PUT",
+        body: JSON.stringify({
+            title,
+            topic,
+            status,
+            description,
+            date,
+        }),
+    });
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error);
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}
+
+
+export async function deleteTask({ id, token }) {
+    const response = await fetch("https://wedev-api.sky.pro/api/kanban"+`/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        method: "DELETE",
+    });
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error);
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}
 
 export async function getReg({ name, login, password }) {
     const response = await fetch("https://wedev-api.sky.pro/api/user", {
